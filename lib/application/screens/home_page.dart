@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    Provider.of<PhotoProvider>(context, listen: false).curatedPhoto();
+    Provider.of<PhotoProvider>(context, listen: false).getPhotos();
   }
 
   @override
@@ -33,219 +33,214 @@ class _HomePageState extends State<HomePage> {
                 ? const Center(
                     child: Text('Error loading photos'),
                   )
-                : photosProvider.photos.isEmpty
-                    ? const Center(
-                        child: Text('Couldn\'t find any photos to load'),
-                      )
-                    : SingleChildScrollView(
-                        // TODO: Optimize these widgets and implement network calls for each of them
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 15.0, bottom: 15.0, top: 15.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                : SingleChildScrollView(
+                    // TODO: Optimize these widgets and implement network calls for each of them
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          left: 15.0, bottom: 15.0, top: 15.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Photos',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headline3!
-                                        .apply(
-                                            color: Colors.black,
-                                            fontWeightDelta: 5),
-                                  ),
-                                  Text(
-                                    'Videos',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headline3!
-                                        .apply(
-                                            color: Colors.black,
-                                            fontWeightDelta: 5),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(Icons.search),
-                                    iconSize: 35,
-                                    padding: const EdgeInsets.only(right: 15.0),
-                                  )
-                                ],
-                              ),
-                              Constants.gap,
                               Text(
-                                'Featured Collection',
+                                'Photos',
                                 style: Theme.of(context)
                                     .textTheme
-                                    .headline5!
-                                    .apply(color: Colors.black),
+                                    .headline3!
+                                    .apply(
+                                        color: Colors.black,
+                                        fontWeightDelta: 5),
                               ),
-                              Constants.gap,
                               Text(
-                                'Cool Cats',
+                                'Videos',
                                 style: Theme.of(context)
                                     .textTheme
-                                    .headline6!
-                                    .apply(color: Colors.black),
+                                    .headline3!
+                                    .apply(
+                                        color: Colors.black,
+                                        fontWeightDelta: 5),
                               ),
-                              Constants.gap,
-                              SizedBox(
-                                height: 250,
-                                width: double.infinity,
-                                child: CategoriesPhotoGrid(
-                                    photosProvider: photosProvider),
-                              ),
-                              Constants.gap,
-                              Constants.gap,
-                              Text(
-                                'Curated',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline5!
-                                    .apply(color: Colors.black),
-                              ),
-                              Constants.gap,
-                              SizedBox(
-                                height: 250,
-                                width: double.infinity,
-                                child: CategoriesPhotoGrid(
-                                    photosProvider: photosProvider),
-                              ),
-                              Constants.gap,
-                              Constants.gap,
-                              Text(
-                                'Nature',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline5!
-                                    .apply(color: Colors.black),
-                              ),
-                              Constants.gap,
-                              SizedBox(
-                                height: 250,
-                                width: double.infinity,
-                                child: CategoriesPhotoGrid(
-                                    photosProvider: photosProvider),
-                              ),
-                              Constants.gap,
-                              Constants.gap,
-                              Text(
-                                'Work From Home',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline5!
-                                    .apply(color: Colors.black),
-                              ),
-                              Constants.gap,
-                              SizedBox(
-                                height: 250,
-                                width: double.infinity,
-                                child: CategoriesPhotoGrid(
-                                    photosProvider: photosProvider),
-                              ),
-                              Constants.gap,
-                              Constants.gap,
-                              Text(
-                                'Lights',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline5!
-                                    .apply(color: Colors.black),
-                              ),
-                              Constants.gap,
-                              SizedBox(
-                                height: 250,
-                                width: double.infinity,
-                                child: CategoriesPhotoGrid(
-                                    photosProvider: photosProvider),
-                              ),
-                              Constants.gap,
-                              Constants.gap,
-                              Text(
-                                'Texture',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline5!
-                                    .apply(color: Colors.black),
-                              ),
-                              Constants.gap,
-                              SizedBox(
-                                height: 250,
-                                width: double.infinity,
-                                child: CategoriesPhotoGrid(
-                                    photosProvider: photosProvider),
-                              ),
-                              Constants.gap,
-                              Constants.gap,
-                              Text(
-                                'Raining',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline5!
-                                    .apply(color: Colors.black),
-                              ),
-                              Constants.gap,
-                              SizedBox(
-                                height: 250,
-                                width: double.infinity,
-                                child: CategoriesPhotoGrid(
-                                    photosProvider: photosProvider),
-                              ),
-                              Constants.gap,
-                              Constants.gap,
-                              Text(
-                                'Adventure',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline5!
-                                    .apply(color: Colors.black),
-                              ),
-                              Constants.gap,
-                              SizedBox(
-                                height: 250,
-                                width: double.infinity,
-                                child: CategoriesPhotoGrid(
-                                    photosProvider: photosProvider),
-                              ),
-                              Constants.gap,
-                              Constants.gap,
-                              Text(
-                                'Dark',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline5!
-                                    .apply(color: Colors.black),
-                              ),
-                              Constants.gap,
-                              SizedBox(
-                                height: 250,
-                                width: double.infinity,
-                                child: CategoriesPhotoGrid(
-                                    photosProvider: photosProvider),
-                              ),
-                              Constants.gap,
-                              Constants.gap,
-                              Text(
-                                'Retro',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline5!
-                                    .apply(color: Colors.black),
-                              ),
-                              Constants.gap,
-                              SizedBox(
-                                height: 250,
-                                width: double.infinity,
-                                child: CategoriesPhotoGrid(
-                                    photosProvider: photosProvider),
-                              ),
+                              IconButton(
+                                onPressed: () {},
+                                icon: const Icon(Icons.search),
+                                iconSize: 35,
+                                padding: const EdgeInsets.only(right: 15.0),
+                              )
                             ],
                           ),
-                        ),
+                          Constants.gap,
+                          Text(
+                            'Featured Collection',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline5!
+                                .apply(color: Colors.black),
+                          ),
+                          Constants.gap,
+                          Text(
+                            'Cool Cats',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline6!
+                                .apply(color: Colors.black),
+                          ),
+                          Constants.gap,
+                          SizedBox(
+                            height: 250,
+                            width: double.infinity,
+                            child: CategoriesPhotoGrid(
+                                photos: photosProvider.curatedPhotos),
+                          ),
+                          Constants.gap,
+                          Constants.gap,
+                          Text(
+                            'Curated',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline5!
+                                .apply(color: Colors.black),
+                          ),
+                          Constants.gap,
+                          SizedBox(
+                            height: 250,
+                            width: double.infinity,
+                            child: CategoriesPhotoGrid(
+                                photos: photosProvider.curatedPhotos),
+                          ),
+                          Constants.gap,
+                          Constants.gap,
+                          Text(
+                            'Nature',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline5!
+                                .apply(color: Colors.black),
+                          ),
+                          Constants.gap,
+                          SizedBox(
+                            height: 250,
+                            width: double.infinity,
+                            child: CategoriesPhotoGrid(
+                                photos: photosProvider.naturePhotos),
+                          ),
+                          Constants.gap,
+                          Constants.gap,
+                          Text(
+                            'Work From Home',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline5!
+                                .apply(color: Colors.black),
+                          ),
+                          Constants.gap,
+                          SizedBox(
+                            height: 250,
+                            width: double.infinity,
+                            child: CategoriesPhotoGrid(
+                                photos: photosProvider.wfhPhotos),
+                          ),
+                          Constants.gap,
+                          Constants.gap,
+                          Text(
+                            'Lights',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline5!
+                                .apply(color: Colors.black),
+                          ),
+                          Constants.gap,
+                          SizedBox(
+                            height: 250,
+                            width: double.infinity,
+                            child: CategoriesPhotoGrid(
+                                photos: photosProvider.lightsPhotos),
+                          ),
+                          Constants.gap,
+                          Constants.gap,
+                          Text(
+                            'Texture',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline5!
+                                .apply(color: Colors.black),
+                          ),
+                          Constants.gap,
+                          SizedBox(
+                            height: 250,
+                            width: double.infinity,
+                            child: CategoriesPhotoGrid(
+                                photos: photosProvider.texturePhotos),
+                          ),
+                          Constants.gap,
+                          Constants.gap,
+                          Text(
+                            'Raining',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline5!
+                                .apply(color: Colors.black),
+                          ),
+                          Constants.gap,
+                          SizedBox(
+                            height: 250,
+                            width: double.infinity,
+                            child: CategoriesPhotoGrid(
+                                photos: photosProvider.rainingPhotos),
+                          ),
+                          Constants.gap,
+                          Constants.gap,
+                          Text(
+                            'Adventure',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline5!
+                                .apply(color: Colors.black),
+                          ),
+                          Constants.gap,
+                          SizedBox(
+                            height: 250,
+                            width: double.infinity,
+                            child: CategoriesPhotoGrid(
+                                photos: photosProvider.adventurePhotos),
+                          ),
+                          Constants.gap,
+                          Constants.gap,
+                          Text(
+                            'Dark',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline5!
+                                .apply(color: Colors.black),
+                          ),
+                          Constants.gap,
+                          SizedBox(
+                            height: 250,
+                            width: double.infinity,
+                            child: CategoriesPhotoGrid(
+                                photos: photosProvider.darkPhotos),
+                          ),
+                          Constants.gap,
+                          Constants.gap,
+                          Text(
+                            'Retro',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline5!
+                                .apply(color: Colors.black),
+                          ),
+                          Constants.gap,
+                          SizedBox(
+                            height: 250,
+                            width: double.infinity,
+                            child: CategoriesPhotoGrid(
+                                photos: photosProvider.retroPhotos),
+                          ),
+                        ],
                       ),
+                    ),
+                  ),
       ),
     );
   }

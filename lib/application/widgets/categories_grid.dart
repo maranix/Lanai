@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:lanai/domain/services/photo_provider.dart';
+import 'package:lanai/domain/models/photo_model.dart';
 
 class CategoriesPhotoGrid extends StatelessWidget {
   const CategoriesPhotoGrid({
     Key? key,
-    required this.photosProvider,
+    required this.photos,
   }) : super(key: key);
 
-  final PhotoProvider photosProvider;
+  final List<PhotoElement> photos;
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +19,10 @@ class CategoriesPhotoGrid extends StatelessWidget {
         childAspectRatio: 1.0,
       ),
       scrollDirection: Axis.horizontal,
-      itemCount: photosProvider.photos.length,
+      itemCount: photos.length,
       itemBuilder: (context, index) {
         return Image.network(
-          photosProvider.photos[index].src.large,
+          photos[index].src.large,
           fit: BoxFit.cover,
         );
       },
