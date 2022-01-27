@@ -4,3 +4,10 @@ enum PhotoListViewState {
   loaded,
   error,
 }
+
+enum CollectionListViewState {
+  initial,
+  loading,
+  loaded,
+  error,
+}
