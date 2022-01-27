@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 import '../constants.dart';
 
-class PhotoRepository extends PexelsRepository {
+class PhotoRepository extends PexelsPhotoRepository {
   @override
   Future<List<PhotoElement>> getCuratedPhotos() async {
     final response = await http.get(
