@@ -56,7 +56,6 @@ class PhotoProvider extends ChangeNotifier {
         _darkPhotos = value[7];
         _retroPhotos = value[8];
         _state = PhotoListViewState.loaded;
-        notifyListeners();
       });
       _state = PhotoListViewState.loaded;
     } catch (e) {
