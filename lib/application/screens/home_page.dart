@@ -17,11 +17,17 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     Provider.of<PhotoProvider>(context, listen: false).getPhotos();
+    // ! Reserved for future release
+    // Provider.of<CollectionsProvider>(context, listen: false)
+    //     .getCollectionsList();
   }
 
+  // TODO: Try to reduce the rebuid of the widgets down to 2.
+  // These widgets are built 3 times, once for each state (initial, loading, loaded).
   @override
   Widget build(BuildContext context) {
     final photosProvider = Provider.of<PhotoProvider>(context);
+    // final collectionsProvider = Provider.of<CollectionsProvider>(context);
 
     return Scaffold(
       body: SafeArea(
@@ -70,46 +76,39 @@ class _HomePageState extends State<HomePage> {
                               )
                             ],
                           ),
-                          Constants.gap,
-                          Text(
-                            'Featured Collection',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline5!
-                                .apply(color: Colors.black),
-                          ),
-                          Constants.gap,
-                          Text(
-                            'Cool Cats',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline6!
-                                .apply(color: Colors.black),
-                          ),
-                          Constants.gap,
-                          SizedBox(
-                            height: 250,
-                            width: double.infinity,
-                            child: CategoriesPhotoGrid(
-                                photos: photosProvider.curatedPhotos),
-                          ),
-                          Constants.gap,
-                          Constants.gap,
-                          Text(
-                            'Curated',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline5!
-                                .apply(color: Colors.black),
-                          ),
-                          Constants.gap,
-                          SizedBox(
-                            height: 250,
-                            width: double.infinity,
-                            child: CategoriesPhotoGrid(
-                                photos: photosProvider.curatedPhotos),
-                          ),
-                          Constants.gap,
+                          // ! Reserved for future release
+                          // Constants.gap,
+                          // Text(
+                          //   'Featured Collection',
+                          //   style: Theme.of(context)
+                          //       .textTheme
+                          //       .headline5!
+                          //       .apply(color: Colors.black),
+                          // ),
+                          // Constants.gap,
+                          // SizedBox(
+                          //   height: 250,
+                          //   width: double.infinity,
+                          //   child: CollectionsGrid(
+                          //       collection: collectionsProvider.collections),
+                          // ),
+                          // Constants.gap,
+                          // Constants.gap,
+                          // Text(
+                          //   'Curated',
+                          //   style: Theme.of(context)
+                          //       .textTheme
+                          //       .headline5!
+                          //       .apply(color: Colors.black),
+                          // ),
+                          // Constants.gap,
+                          // SizedBox(
+                          //   height: 250,
+                          //   width: double.infinity,
+                          //   child: CategoriesPhotoGrid(
+                          //       photos: photosProvider.curatedPhotos),
+                          // ),
+                          // Constants.gap,
                           Constants.gap,
                           Text(
                             'Nature',
