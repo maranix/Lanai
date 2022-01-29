@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lanai/data/constants.dart';
 import 'package:lanai/data/repositories/photo_repository.dart';
 import 'package:lanai/domain/enums/enums.dart';
 import 'package:lanai/domain/models/photo_model.dart';
@@ -6,7 +7,8 @@ import 'package:lanai/domain/models/photo_model.dart';
 class PhotoProvider extends ChangeNotifier {
   final _photoRepository = PhotoRepository();
 
-  List<PhotoElement> _curatedPhotos = [];
+  // ! reserverd for future release
+  // List<PhotoElement> _curatedPhotos = [];
   List<PhotoElement> _naturePhotos = [];
   List<PhotoElement> _wfhPhotos = [];
   List<PhotoElement> _lightsPhotos = [];
@@ -18,7 +20,8 @@ class PhotoProvider extends ChangeNotifier {
 
   PhotoListViewState _state = PhotoListViewState.initial;
 
-  List<PhotoElement> get curatedPhotos => _curatedPhotos;
+  // ! reserverd for future release
+  // List<PhotoElement> get curatedPhotos => _curatedPhotos;
   List<PhotoElement> get naturePhotos => _naturePhotos;
   List<PhotoElement> get wfhPhotos => _wfhPhotos;
   List<PhotoElement> get lightsPhotos => _lightsPhotos;
@@ -34,28 +37,18 @@ class PhotoProvider extends ChangeNotifier {
     _state = PhotoListViewState.loading;
     try {
       await Future.wait(
-        [
-          _photoRepository.getCuratedPhotos(),
-          _photoRepository.getNaturePhotos(),
-          _photoRepository.getWFHPhotos(),
-          _photoRepository.getLightPhotos(),
-          _photoRepository.getTexturePhotos(),
-          _photoRepository.getRainingPhotos(),
-          _photoRepository.getAdventurePhotos(),
-          _photoRepository.getDarkPhotos(),
-          _photoRepository.getRetroPhotos(),
-        ],
-      ).then((value) {
-        _curatedPhotos = value[0];
-        _naturePhotos = value[1];
-        _wfhPhotos = value[2];
-        _lightsPhotos = value[3];
-        _texturePhotos = value[4];
-        _rainingPhotos = value[5];
-        _adventurePhotos = value[6];
-        _darkPhotos = value[7];
-        _retroPhotos = value[8];
-        _state = PhotoListViewState.loaded;
+        queryKeywords.map((e) => _photoRepository.getPhotos(e)),
+      ).then((List response) {
+        // !reserverd for future release
+        // _curatedPhotos = response[0];
+        _naturePhotos = response[0];
+        _wfhPhotos = response[1];
+        _lightsPhotos = response[2];
+        _texturePhotos = response[3];
+        _rainingPhotos = response[4];
+        _adventurePhotos = response[5];
+        _darkPhotos = response[6];
+        _retroPhotos = response[7];
       });
       _state = PhotoListViewState.loaded;
     } catch (e) {
