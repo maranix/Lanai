@@ -10,6 +10,10 @@ void main() async {
         ChangeNotifierProvider<PhotoProvider>(
           create: (_) => PhotoProvider(),
         ),
+        // ! Reserved for future release
+        // ChangeNotifierProvider<CollectionsProvider>(
+        //   create: (_) => CollectionsProvider(),
+        // ),
       ],
       child: const App(),
     ),
