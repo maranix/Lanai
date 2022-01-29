@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:lanai/domain/models/photo_model.dart';
 
@@ -21,9 +22,12 @@ class CategoriesPhotoGrid extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       itemCount: photos.length,
       itemBuilder: (context, index) {
-        return Image.network(
-          photos[index].src.large,
+        return CachedNetworkImage(
+          imageUrl: photos[index].src.large,
           fit: BoxFit.cover,
+          placeholder: (context, url) => const Center(
+            child: CircularProgressIndicator(),
+          ),
         );
       },
     );
