@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lanai/application/constants/contants.dart';
-import 'package:lanai/application/widgets/categories_grid.dart';
-import 'package:lanai/domain/enums/enums.dart';
+import 'package:lanai/application/theme/style.dart';
+import 'package:lanai/application/widgets/category_showcase.dart';
 import 'package:lanai/domain/services/photo_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -13,233 +13,117 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  var selectedCategory = 'Nature';
+
   @override
   void initState() {
     super.initState();
     Provider.of<PhotoProvider>(context, listen: false).getPhotos();
-    // ! Reserved for future release
-    // Provider.of<CollectionsProvider>(context, listen: false)
-    //     .getCollectionsList();
   }
 
-  // TODO: Try to reduce the rebuid of the widgets down to 2.
-  // These widgets are built 3 times, once for each state (initial, loading, loaded).
   @override
   Widget build(BuildContext context) {
-    final photosProvider = Provider.of<PhotoProvider>(context);
-    // final collectionsProvider = Provider.of<CollectionsProvider>(context);
-
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Lanai',
+          style: Style.textStyleHeading,
+        ),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.search_rounded),
+            color: Colors.black,
+          ),
+        ],
+        toolbarHeight: MediaQuery.of(context).size.height * 0.1,
+        elevation: 0,
+        backgroundColor: const Color(0xFFFFFEF4),
+      ),
+      backgroundColor: const Color(0xFFFFFEF4),
       body: SafeArea(
-        child: photosProvider.state == PhotoListViewState.loading
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : photosProvider.state == PhotoListViewState.error
-                ? const Center(
-                    child: Text('Error loading photos'),
-                  )
-                : SingleChildScrollView(
-                    // TODO: Optimize these widgets and implement network calls for each of them
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          left: 15.0, bottom: 15.0, top: 15.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Photos',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline3!
-                                    .apply(
-                                        color: Colors.black,
-                                        fontWeightDelta: 5),
-                              ),
-                              Text(
-                                'Videos',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline3!
-                                    .apply(
-                                        color: Colors.black,
-                                        fontWeightDelta: 5),
-                              ),
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.search),
-                                iconSize: 35,
-                                padding: const EdgeInsets.only(right: 15.0),
-                              )
-                            ],
-                          ),
-                          // ! Reserved for future release
-                          // Constants.gap,
-                          // Text(
-                          //   'Featured Collection',
-                          //   style: Theme.of(context)
-                          //       .textTheme
-                          //       .headline5!
-                          //       .apply(color: Colors.black),
-                          // ),
-                          // Constants.gap,
-                          // SizedBox(
-                          //   height: 250,
-                          //   width: double.infinity,
-                          //   child: CollectionsGrid(
-                          //       collection: collectionsProvider.collections),
-                          // ),
-                          // Constants.gap,
-                          // Constants.gap,
-                          // Text(
-                          //   'Curated',
-                          //   style: Theme.of(context)
-                          //       .textTheme
-                          //       .headline5!
-                          //       .apply(color: Colors.black),
-                          // ),
-                          // Constants.gap,
-                          // SizedBox(
-                          //   height: 250,
-                          //   width: double.infinity,
-                          //   child: CategoriesPhotoGrid(
-                          //       photos: photosProvider.curatedPhotos),
-                          // ),
-                          // Constants.gap,
-                          Constants.gap,
-                          Text(
-                            'Nature',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline5!
-                                .apply(color: Colors.black),
-                          ),
-                          Constants.gap,
-                          SizedBox(
-                            height: 250,
-                            width: double.infinity,
-                            child: CategoriesPhotoGrid(
-                                photos: photosProvider.naturePhotos),
-                          ),
-                          Constants.gap,
-                          Constants.gap,
-                          Text(
-                            'Work From Home',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline5!
-                                .apply(color: Colors.black),
-                          ),
-                          Constants.gap,
-                          SizedBox(
-                            height: 250,
-                            width: double.infinity,
-                            child: CategoriesPhotoGrid(
-                                photos: photosProvider.wfhPhotos),
-                          ),
-                          Constants.gap,
-                          Constants.gap,
-                          Text(
-                            'Lights',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline5!
-                                .apply(color: Colors.black),
-                          ),
-                          Constants.gap,
-                          SizedBox(
-                            height: 250,
-                            width: double.infinity,
-                            child: CategoriesPhotoGrid(
-                                photos: photosProvider.lightsPhotos),
-                          ),
-                          Constants.gap,
-                          Constants.gap,
-                          Text(
-                            'Texture',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline5!
-                                .apply(color: Colors.black),
-                          ),
-                          Constants.gap,
-                          SizedBox(
-                            height: 250,
-                            width: double.infinity,
-                            child: CategoriesPhotoGrid(
-                                photos: photosProvider.texturePhotos),
-                          ),
-                          Constants.gap,
-                          Constants.gap,
-                          Text(
-                            'Raining',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline5!
-                                .apply(color: Colors.black),
-                          ),
-                          Constants.gap,
-                          SizedBox(
-                            height: 250,
-                            width: double.infinity,
-                            child: CategoriesPhotoGrid(
-                                photos: photosProvider.rainingPhotos),
-                          ),
-                          Constants.gap,
-                          Constants.gap,
-                          Text(
-                            'Adventure',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline5!
-                                .apply(color: Colors.black),
-                          ),
-                          Constants.gap,
-                          SizedBox(
-                            height: 250,
-                            width: double.infinity,
-                            child: CategoriesPhotoGrid(
-                                photos: photosProvider.adventurePhotos),
-                          ),
-                          Constants.gap,
-                          Constants.gap,
-                          Text(
-                            'Dark',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline5!
-                                .apply(color: Colors.black),
-                          ),
-                          Constants.gap,
-                          SizedBox(
-                            height: 250,
-                            width: double.infinity,
-                            child: CategoriesPhotoGrid(
-                                photos: photosProvider.darkPhotos),
-                          ),
-                          Constants.gap,
-                          Constants.gap,
-                          Text(
-                            'Retro',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline5!
-                                .apply(color: Colors.black),
-                          ),
-                          Constants.gap,
-                          SizedBox(
-                            height: 250,
-                            width: double.infinity,
-                            child: CategoriesPhotoGrid(
-                                photos: photosProvider.retroPhotos),
-                          ),
-                        ],
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 15.0, left: 15.0),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 50,
+                  width: double.infinity,
+                  child: ListView.separated(
+                    itemBuilder: (context, index) => TextButton(
+                      onPressed: () {
+                        setState(() {
+                          selectedCategory = Constants.categoryList[index];
+                        });
+                      },
+                      child: Text(
+                        Constants.categoryList[index],
+                        style: TextStyle(
+                          color:
+                              selectedCategory == Constants.categoryList[index]
+                                  ? Colors.black
+                                  : Colors.grey,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(width: 10),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: Constants.categoryList.length,
                   ),
+                ),
+                Constants.gap,
+                selectedCategory == 'Nature'
+                    ? CategoryShowCase(
+                        photos:
+                            Provider.of<PhotoProvider>(context).naturePhotos,
+                      )
+                    : selectedCategory == 'Light'
+                        ? CategoryShowCase(
+                            photos: Provider.of<PhotoProvider>(context)
+                                .lightsPhotos,
+                          )
+                        : selectedCategory == 'Texture'
+                            ? CategoryShowCase(
+                                photos: Provider.of<PhotoProvider>(context)
+                                    .texturePhotos,
+                              )
+                            : selectedCategory == 'Raining'
+                                ? CategoryShowCase(
+                                    photos: Provider.of<PhotoProvider>(context)
+                                        .rainingPhotos,
+                                  )
+                                : selectedCategory == 'Adventure'
+                                    ? CategoryShowCase(
+                                        photos:
+                                            Provider.of<PhotoProvider>(context)
+                                                .adventurePhotos,
+                                      )
+                                    : selectedCategory == 'Dark'
+                                        ? CategoryShowCase(
+                                            photos: Provider.of<PhotoProvider>(
+                                                    context)
+                                                .darkPhotos,
+                                          )
+                                        : selectedCategory == 'Retro'
+                                            ? CategoryShowCase(
+                                                photos:
+                                                    Provider.of<PhotoProvider>(
+                                                            context)
+                                                        .retroPhotos,
+                                              )
+                                            : const Center(
+                                                child: CircularProgressIndicator
+                                                    .adaptive(),
+                                              ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
