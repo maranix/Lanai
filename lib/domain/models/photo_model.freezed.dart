@@ -168,9 +168,9 @@ class _$PhotoElementTearOff {
       required int height,
       required String url,
       required String photographer,
-      String? photographerUrl,
-      int? photographerId,
-      String? avgColor,
+      @JsonKey(name: 'photographer_url') required String photographerUrl,
+      @JsonKey(name: 'photographer_id') required int photographerId,
+      @JsonKey(name: 'avg_color') required String avgColor,
       required Src src,
       required bool liked,
       required String alt}) {
@@ -204,9 +204,12 @@ mixin _$PhotoElement {
   int get height => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
   String get photographer => throw _privateConstructorUsedError;
-  String? get photographerUrl => throw _privateConstructorUsedError;
-  int? get photographerId => throw _privateConstructorUsedError;
-  String? get avgColor => throw _privateConstructorUsedError;
+  @JsonKey(name: 'photographer_url')
+  String get photographerUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: 'photographer_id')
+  int get photographerId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'avg_color')
+  String get avgColor => throw _privateConstructorUsedError;
   Src get src => throw _privateConstructorUsedError;
   bool get liked => throw _privateConstructorUsedError;
   String get alt => throw _privateConstructorUsedError;
@@ -228,9 +231,9 @@ abstract class $PhotoElementCopyWith<$Res> {
       int height,
       String url,
       String photographer,
-      String? photographerUrl,
-      int? photographerId,
-      String? avgColor,
+      @JsonKey(name: 'photographer_url') String photographerUrl,
+      @JsonKey(name: 'photographer_id') int photographerId,
+      @JsonKey(name: 'avg_color') String avgColor,
       Src src,
       bool liked,
       String alt});
@@ -284,15 +287,15 @@ class _$PhotoElementCopyWithImpl<$Res> implements $PhotoElementCopyWith<$Res> {
       photographerUrl: photographerUrl == freezed
           ? _value.photographerUrl
           : photographerUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       photographerId: photographerId == freezed
           ? _value.photographerId
           : photographerId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       avgColor: avgColor == freezed
           ? _value.avgColor
           : avgColor // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       src: src == freezed
           ? _value.src
           : src // ignore: cast_nullable_to_non_nullable
@@ -329,9 +332,9 @@ abstract class _$PhotoElementCopyWith<$Res>
       int height,
       String url,
       String photographer,
-      String? photographerUrl,
-      int? photographerId,
-      String? avgColor,
+      @JsonKey(name: 'photographer_url') String photographerUrl,
+      @JsonKey(name: 'photographer_id') int photographerId,
+      @JsonKey(name: 'avg_color') String avgColor,
       Src src,
       bool liked,
       String alt});
@@ -388,15 +391,15 @@ class __$PhotoElementCopyWithImpl<$Res> extends _$PhotoElementCopyWithImpl<$Res>
       photographerUrl: photographerUrl == freezed
           ? _value.photographerUrl
           : photographerUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       photographerId: photographerId == freezed
           ? _value.photographerId
           : photographerId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       avgColor: avgColor == freezed
           ? _value.avgColor
           : avgColor // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       src: src == freezed
           ? _value.src
           : src // ignore: cast_nullable_to_non_nullable
@@ -422,9 +425,9 @@ class _$_PhotoElement implements _PhotoElement {
       required this.height,
       required this.url,
       required this.photographer,
-      this.photographerUrl,
-      this.photographerId,
-      this.avgColor,
+      @JsonKey(name: 'photographer_url') required this.photographerUrl,
+      @JsonKey(name: 'photographer_id') required this.photographerId,
+      @JsonKey(name: 'avg_color') required this.avgColor,
       required this.src,
       required this.liked,
       required this.alt});
@@ -443,11 +446,14 @@ class _$_PhotoElement implements _PhotoElement {
   @override
   final String photographer;
   @override
-  final String? photographerUrl;
+  @JsonKey(name: 'photographer_url')
+  final String photographerUrl;
   @override
-  final int? photographerId;
+  @JsonKey(name: 'photographer_id')
+  final int photographerId;
   @override
-  final String? avgColor;
+  @JsonKey(name: 'avg_color')
+  final String avgColor;
   @override
   final Src src;
   @override
@@ -514,9 +520,9 @@ abstract class _PhotoElement implements PhotoElement {
       required int height,
       required String url,
       required String photographer,
-      String? photographerUrl,
-      int? photographerId,
-      String? avgColor,
+      @JsonKey(name: 'photographer_url') required String photographerUrl,
+      @JsonKey(name: 'photographer_id') required int photographerId,
+      @JsonKey(name: 'avg_color') required String avgColor,
       required Src src,
       required bool liked,
       required String alt}) = _$_PhotoElement;
@@ -535,11 +541,14 @@ abstract class _PhotoElement implements PhotoElement {
   @override
   String get photographer;
   @override
-  String? get photographerUrl;
+  @JsonKey(name: 'photographer_url')
+  String get photographerUrl;
   @override
-  int? get photographerId;
+  @JsonKey(name: 'photographer_id')
+  int get photographerId;
   @override
-  String? get avgColor;
+  @JsonKey(name: 'avg_color')
+  String get avgColor;
   @override
   Src get src;
   @override
