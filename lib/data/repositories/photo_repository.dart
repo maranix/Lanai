@@ -38,7 +38,7 @@ class PhotoRepository extends PexelsPhotoRepository {
     final cache = await ApiCacheProvider.getCachedRequest(query);
     if (cache == null) {
       final response = await http.get(
-        Uri.parse(apiPREFIX + 'search?query=$query&page=$page&per_page=14'),
+        Uri.parse(apiPREFIX + 'search?query=$query&page=$page&per_page=80'),
         headers: {
           'Authorization': apiKEY,
           'Content-Type': 'application/json',
