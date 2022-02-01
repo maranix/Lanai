@@ -14,11 +14,15 @@ class ApiCacheProvider {
     final _sharedPreferences = await SharedPreferences.getInstance();
 
     final _cacheTime = _sharedPreferences.getString('cacheTime');
-    final _elapsedTime =
-        DateTime.now().difference(DateTime.parse(_cacheTime!)).inHours;
-    if (_elapsedTime >= 4) {
-      await _sharedPreferences.clear();
+
+    if (_cacheTime == null) {
+      return null;
     } else {
+      final _elapsedTime =
+          DateTime.now().difference(DateTime.parse(_cacheTime)).inHours;
+      if (_elapsedTime >= 4) {
+        await _sharedPreferences.clear();
+      }
       return _sharedPreferences.getString(key);
     }
   }
