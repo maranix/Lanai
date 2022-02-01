@@ -48,6 +48,7 @@ class CategoryShowCase extends StatelessWidget {
         ),
         childCount: photos.length,
       ),
+      physics: const NeverScrollableScrollPhysics(),
     );
   }
 }
