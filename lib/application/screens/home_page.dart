@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lanai/application/constants/contants.dart';
+import 'package:lanai/application/screens/search_page.dart';
 import 'package:lanai/application/theme/style.dart';
 import 'package:lanai/application/widgets/category_showcase.dart';
 import 'package:lanai/domain/services/photo_provider.dart';
@@ -32,7 +33,14 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const SearchPage(),
+                ),
+              );
+            },
             icon: const Icon(Icons.search_rounded),
             color: Colors.black,
           ),
