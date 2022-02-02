@@ -17,6 +17,7 @@ class PhotoProvider extends ChangeNotifier {
   List<PhotoElement> _adventurePhotos = [];
   List<PhotoElement> _darkPhotos = [];
   List<PhotoElement> _retroPhotos = [];
+  List<PhotoElement> _queryPhotos = [];
 
   PhotoListViewState _state = PhotoListViewState.initial;
 
@@ -30,6 +31,7 @@ class PhotoProvider extends ChangeNotifier {
   List<PhotoElement> get adventurePhotos => _adventurePhotos;
   List<PhotoElement> get darkPhotos => _darkPhotos;
   List<PhotoElement> get retroPhotos => _retroPhotos;
+  List<PhotoElement> get queryPhotos => _queryPhotos;
 
   PhotoListViewState get state => _state;
 
@@ -50,6 +52,17 @@ class PhotoProvider extends ChangeNotifier {
         _darkPhotos = response[6];
         _retroPhotos = response[7];
       });
+      _state = PhotoListViewState.loaded;
+    } catch (e) {
+      _state = PhotoListViewState.error;
+    }
+    notifyListeners();
+  }
+
+  void getPhotosByQuery(String query) async {
+    _state = PhotoListViewState.loading;
+    try {
+      _queryPhotos = await _photoRepository.getPhotos(query);
       _state = PhotoListViewState.loaded;
     } catch (e) {
       _state = PhotoListViewState.error;
