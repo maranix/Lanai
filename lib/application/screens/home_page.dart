@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:lanai/application/constants/contants.dart';
 import 'package:lanai/application/screens/search_page.dart';
@@ -5,6 +6,9 @@ import 'package:lanai/application/theme/style.dart';
 import 'package:lanai/application/widgets/category_showcase.dart';
 import 'package:lanai/domain/services/photo_provider.dart';
 import 'package:provider/provider.dart';
+
+import 'about_page.dart';
+import 'legal_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -26,6 +30,66 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFEF4),
+      drawer: Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              children: [
+                ListTile(
+                  title: const Text(
+                    'Legal',
+                    style: Style.textStyleDrawer,
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const LegalPage(),
+                      ),
+                    );
+                  },
+                ),
+                ListTile(
+                  title: const Text(
+                    'About',
+                    style: Style.textStyleDrawer,
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const AboutPage(),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Powered by',
+                    style: Style.textStyleDrawer,
+                  ),
+                  const SizedBox(width: 10),
+                  Flexible(
+                    child: CachedNetworkImage(
+                        imageUrl:
+                            'https://images.pexels.com/lib/api/pexels.png'),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverAppBar(
@@ -34,6 +98,7 @@ class _HomePageState extends State<HomePage> {
               style: Style.textStyleHeading,
             ),
             centerTitle: true,
+            iconTheme: const IconThemeData(color: Colors.black),
             actions: [
               IconButton(
                 onPressed: () {
@@ -45,7 +110,6 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
                 icon: const Icon(Icons.search_rounded),
-                color: Colors.black,
               ),
             ],
             toolbarHeight: MediaQuery.of(context).size.height * 0.1,

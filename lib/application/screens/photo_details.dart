@@ -15,10 +15,10 @@ class PhotoDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.black),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
-          color: Colors.black,
         ),
         actions: [
           IconButton(
@@ -26,7 +26,6 @@ class PhotoDetails extends StatelessWidget {
             onPressed: () {
               Share.share(data.url, subject: data.alt);
             },
-            color: Colors.black,
           ),
         ],
         elevation: 0,
