@@ -32,7 +32,7 @@ class PhotoRepository extends PexelsPhotoRepository {
   @override
   Future<List<PhotoElement>> getPhotos(String query, {int? page}) async {
     final rand = Random();
-    page ??= 1 + rand.nextInt(499);
+    page ??= 1 + rand.nextInt(99);
 
     // TODO: Refactor cache hit and cache miss logic to an elegant one.
     final cache = await ApiCacheProvider.getCachedRequest(query);
