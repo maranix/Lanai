@@ -11,44 +11,49 @@ class CategoryShowCase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.custom(
-      padding: const EdgeInsets.only(right: 15),
-      shrinkWrap: true,
-      gridDelegate: SliverQuiltedGridDelegate(
-        crossAxisCount: 2,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        repeatPattern: QuiltedGridRepeatPattern.inverted,
-        pattern: const [
-          QuiltedGridTile(1, 2),
-          QuiltedGridTile(1, 1),
-          QuiltedGridTile(2, 1),
-          QuiltedGridTile(1, 1),
-        ],
-      ),
-      childrenDelegate: SliverChildBuilderDelegate(
-        (context, index) => GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => PhotoDetails(data: photos[index]),
-              ),
-            );
-          },
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              image: DecorationImage(
-                image: CachedNetworkImageProvider(photos[index].src.large),
-                fit: BoxFit.cover,
-              ),
+    return photos.isNotEmpty
+        ? GridView.custom(
+            padding: const EdgeInsets.only(right: 15),
+            shrinkWrap: true,
+            gridDelegate: SliverQuiltedGridDelegate(
+              crossAxisCount: 2,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              repeatPattern: QuiltedGridRepeatPattern.inverted,
+              pattern: const [
+                QuiltedGridTile(1, 2),
+                QuiltedGridTile(1, 1),
+                QuiltedGridTile(2, 1),
+                QuiltedGridTile(1, 1),
+              ],
             ),
-          ),
-        ),
-        childCount: photos.length,
-      ),
-      physics: const NeverScrollableScrollPhysics(),
-    );
+            childrenDelegate: SliverChildBuilderDelegate(
+              (context, index) => GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PhotoDetails(data: photos[index]),
+                    ),
+                  );
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    image: DecorationImage(
+                      image:
+                          CachedNetworkImageProvider(photos[index].src.large),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
+              childCount: photos.length,
+            ),
+            physics: const NeverScrollableScrollPhysics(),
+          )
+        : const Center(
+            child: CircularProgressIndicator.adaptive(),
+          );
   }
 }
