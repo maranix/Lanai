@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lanai/application/constants/contants.dart';
 import 'package:lanai/application/theme/style.dart';
 import 'package:lanai/domain/models/photo_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PhotoDetails extends StatelessWidget {
   const PhotoDetails({Key? key, required this.data}) : super(key: key);
@@ -46,48 +47,53 @@ class PhotoDetails extends StatelessWidget {
                 ),
               ),
               Constants.gap,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
                         'Photographer:',
                         style: Style.textStyleDetails,
                       ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        'Photographer Url:',
-                        style: Style.textStyleDetails,
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        'Color:',
-                        style: Style.textStyleDetails,
-                      ),
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
                       Text(
                         data.photographer,
                         style: Style.textStyleDetails,
                       ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        data.photographerUrl.toString(),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Photographer Url:',
                         style: Style.textStyleDetails,
                       ),
-                      const SizedBox(
-                        height: 5,
+                      GestureDetector(
+                        onTap: () async {
+                          if (await canLaunch(data.photographerUrl)) {
+                            if (!await launch(data.photographerUrl)) {
+                              throw 'Could not launch ${data.photographerUrl}';
+                            }
+                          }
+                        },
+                        child: const Text(
+                          'Explore more on Pexels',
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontSize: 25,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Color:',
+                        style: Style.textStyleDetails,
                       ),
                       Container(
                         height: 10,
@@ -96,7 +102,7 @@ class PhotoDetails extends StatelessWidget {
                             '0xFF${data.avgColor.replaceFirst(RegExp(r'#'), '')}')),
                       )
                     ],
-                  ),
+                  )
                 ],
               ),
               Constants.gap,
@@ -116,7 +122,13 @@ class PhotoDetails extends StatelessWidget {
               Constants.gap,
               Center(
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    if (await canLaunch(data.url)) {
+                      if (!await launch(data.url)) {
+                        throw 'Could not launch ${data.url}';
+                      }
+                    }
+                  },
                   child: const Text(
                     'Visit on Pexels',
                     style: TextStyle(
