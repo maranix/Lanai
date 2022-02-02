@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lanai/application/constants/contants.dart';
 import 'package:lanai/application/theme/style.dart';
 import 'package:lanai/domain/models/photo_model.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PhotoDetails extends StatelessWidget {
@@ -22,7 +23,9 @@ class PhotoDetails extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.share),
-            onPressed: () {},
+            onPressed: () {
+              Share.share(data.url, subject: data.alt);
+            },
             color: Colors.black,
           ),
         ],
