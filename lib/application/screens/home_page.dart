@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                                     Constants.categoryList[index]
                                 ? Colors.black
                                 : Colors.grey,
-                            fontWeight: FontWeight.w600,
+                            fontSize: 25,
                           ),
                         ),
                       ),
@@ -122,18 +122,12 @@ class _HomePageState extends State<HomePage> {
                                                           context)
                                                       .darkPhotos,
                                             )
-                                          : selectedCategory == 'Retro'
-                                              ? CategoryShowCase(
-                                                  photos: Provider.of<
-                                                              PhotoProvider>(
+                                          : CategoryShowCase(
+                                              photos:
+                                                  Provider.of<PhotoProvider>(
                                                           context)
                                                       .retroPhotos,
-                                                )
-                                              : const Center(
-                                                  child:
-                                                      CircularProgressIndicator
-                                                          .adaptive(),
-                                                ),
+                                            ),
                 ],
               ),
             ),

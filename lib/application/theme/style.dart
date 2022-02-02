@@ -3,13 +3,14 @@ import 'package:flutter/cupertino.dart';
 class Style {
   static const textStyleHeading = TextStyle(
     color: Color(0xFF000000),
-    fontSize: 30,
+    fontSize: 60,
     fontWeight: FontWeight.bold,
+    fontFamily: 'Caveat',
   );
 
-  static const textStyleHeading2 = TextStyle(
+  static const textStyleDetails = TextStyle(
     color: Color(0xFF000000),
-    fontSize: 20,
-    fontWeight: FontWeight.w600,
+    fontSize: 25,
+    fontWeight: FontWeight.bold,
   );
 }

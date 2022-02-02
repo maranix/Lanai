@@ -7,9 +7,12 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: kReleaseMode ? false : true,
-      home: HomePage(),
+      theme: ThemeData(
+        fontFamily: 'Dongle',
+      ),
+      home: const HomePage(),
     );
   }
 }

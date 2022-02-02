@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:lanai/application/constants/contants.dart';
+import 'package:lanai/application/theme/style.dart';
 import 'package:lanai/domain/models/photo_model.dart';
 
 class PhotoDetails extends StatelessWidget {
@@ -53,18 +54,21 @@ class PhotoDetails extends StatelessWidget {
                     children: const [
                       Text(
                         'Photographer:',
+                        style: Style.textStyleDetails,
                       ),
                       SizedBox(
                         height: 5,
                       ),
                       Text(
                         'Photographer Url:',
+                        style: Style.textStyleDetails,
                       ),
                       SizedBox(
                         height: 5,
                       ),
                       Text(
                         'Color:',
+                        style: Style.textStyleDetails,
                       ),
                     ],
                   ),
@@ -73,12 +77,14 @@ class PhotoDetails extends StatelessWidget {
                     children: [
                       Text(
                         data.photographer,
+                        style: Style.textStyleDetails,
                       ),
                       const SizedBox(
                         height: 5,
                       ),
                       Text(
                         data.photographerUrl.toString(),
+                        style: Style.textStyleDetails,
                       ),
                       const SizedBox(
                         height: 5,
@@ -96,14 +102,27 @@ class PhotoDetails extends StatelessWidget {
               Constants.gap,
               Constants.gap,
               Constants.gap,
-              const Text('Description:'),
-              Constants.gap,
-              Text(data.alt),
+              const Text(
+                'Description:',
+                style: Style.textStyleDetails,
+              ),
+              Text(
+                data.alt,
+                style: const TextStyle(
+                  color: Color(0xFF000000),
+                  fontSize: 25,
+                ),
+              ),
               Constants.gap,
               Center(
                 child: ElevatedButton(
                   onPressed: () {},
-                  child: const Text('Visit on Pexels'),
+                  child: const Text(
+                    'Visit on Pexels',
+                    style: TextStyle(
+                      fontSize: 25,
+                    ),
+                  ),
                 ),
               )
             ],
