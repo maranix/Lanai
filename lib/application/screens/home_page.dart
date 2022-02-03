@@ -37,37 +37,40 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              children: [
-                ListTile(
-                  title: const Text(
-                    'Legal',
-                    style: Style.textStyleDrawer,
+            Padding(
+              padding: const EdgeInsets.only(top: 15.0),
+              child: Column(
+                children: [
+                  ListTile(
+                    title: const Text(
+                      'Legal',
+                      style: Style.textStyleDrawer,
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const LegalPage(),
+                        ),
+                      );
+                    },
                   ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const LegalPage(),
-                      ),
-                    );
-                  },
-                ),
-                ListTile(
-                  title: const Text(
-                    'About',
-                    style: Style.textStyleDrawer,
+                  ListTile(
+                    title: const Text(
+                      'About',
+                      style: Style.textStyleDrawer,
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const AboutPage(),
+                        ),
+                      );
+                    },
                   ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const AboutPage(),
-                      ),
-                    );
-                  },
-                ),
-              ],
+                ],
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(18.0),
@@ -112,7 +115,10 @@ class _HomePageState extends State<HomePage> {
                 icon: const Icon(Icons.search_rounded),
               ),
             ],
-            toolbarHeight: MediaQuery.of(context).size.height * 0.1,
+            toolbarHeight:
+                MediaQuery.of(context).orientation == Orientation.portrait
+                    ? MediaQuery.of(context).size.height * 0.1
+                    : MediaQuery.of(context).size.height * 0.15,
             elevation: 0,
             backgroundColor: const Color(0xFFFFFEF4),
           ),

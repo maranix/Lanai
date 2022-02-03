@@ -32,117 +32,239 @@ class PhotoDetails extends StatelessWidget {
         backgroundColor: const Color(0xFFFFFEF4),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
+        child: MediaQuery.of(context).orientation == Orientation.portrait
+            ? _buildPortraitLayout()
+            : _buildLandscapeLayout(context),
+      ),
+    );
+  }
+
+  Widget _buildPortraitLayout() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                image: DecorationImage(
+                  image: CachedNetworkImageProvider(data.src.large),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
+          Constants.gap,
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    image: DecorationImage(
-                      image: CachedNetworkImageProvider(data.src.large),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ),
-              Constants.gap,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Photographer:',
-                        style: Style.textStyleDetails,
-                      ),
-                      Text(
-                        data.photographer,
-                        style: Style.textStyleDetails,
-                      ),
-                    ],
+                  const Text(
+                    'Photographer:',
+                    style: Style.textStyleDetails,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Photographer Url:',
-                        style: Style.textStyleDetails,
-                      ),
-                      GestureDetector(
-                        onTap: () async {
-                          if (await canLaunch(data.photographerUrl)) {
-                            if (!await launch(data.photographerUrl)) {
-                              throw 'Could not launch ${data.photographerUrl}';
-                            }
-                          }
-                        },
-                        child: const Text(
-                          'Explore more on Pexels',
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 25,
-                          ),
-                        ),
-                      ),
-                    ],
+                  Text(
+                    data.photographer,
+                    style: Style.textStyleDetails,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Color:',
-                        style: Style.textStyleDetails,
-                      ),
-                      Container(
-                        height: 10,
-                        width: 10,
-                        color: Color(int.parse(
-                            '0xFF${data.avgColor.replaceFirst(RegExp(r'#'), '')}')),
-                      )
-                    ],
-                  )
                 ],
               ),
-              Constants.gap,
-              Constants.gap,
-              Constants.gap,
-              const Text(
-                'Description:',
-                style: Style.textStyleDetails,
-              ),
-              Text(
-                data.alt,
-                style: const TextStyle(
-                  color: Color(0xFF000000),
-                  fontSize: 25,
-                ),
-              ),
-              Constants.gap,
-              Center(
-                child: ElevatedButton(
-                  onPressed: () async {
-                    if (await canLaunch(data.url)) {
-                      if (!await launch(data.url)) {
-                        throw 'Could not launch ${data.url}';
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Photographer Url:',
+                    style: Style.textStyleDetails,
+                  ),
+                  GestureDetector(
+                    onTap: () async {
+                      if (await canLaunch(data.photographerUrl)) {
+                        if (!await launch(data.photographerUrl)) {
+                          throw 'Could not launch ${data.photographerUrl}';
+                        }
                       }
-                    }
-                  },
-                  child: const Text(
-                    'Visit on Pexels',
-                    style: TextStyle(
-                      fontSize: 25,
+                    },
+                    child: const Text(
+                      'Explore more on Pexels',
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 25,
+                      ),
                     ),
                   ),
-                ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Color:',
+                    style: Style.textStyleDetails,
+                  ),
+                  Container(
+                    height: 10,
+                    width: 10,
+                    color: Color(int.parse(
+                        '0xFF${data.avgColor.replaceFirst(RegExp(r'#'), '')}')),
+                  )
+                ],
               )
             ],
           ),
-        ),
+          Constants.gap,
+          Constants.gap,
+          Constants.gap,
+          const Text(
+            'Description:',
+            style: Style.textStyleDetails,
+          ),
+          Text(
+            data.alt,
+            style: const TextStyle(
+              color: Color(0xFF000000),
+              fontSize: 25,
+            ),
+          ),
+          Constants.gap,
+          Center(
+            child: ElevatedButton(
+              onPressed: () async {
+                if (await canLaunch(data.url)) {
+                  if (!await launch(data.url)) {
+                    throw 'Could not launch ${data.url}';
+                  }
+                }
+              },
+              child: const Text(
+                'Visit on Pexels',
+                style: TextStyle(
+                  fontSize: 25,
+                ),
+              ),
+            ),
+          )
+        ],
       ),
     );
+  }
+
+  Widget _buildLandscapeLayout(context) {
+    return SingleChildScrollView(
+        child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 1.5,
+            width: MediaQuery.of(context).size.width,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                image: DecorationImage(
+                  image: CachedNetworkImageProvider(data.src.large),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
+          Constants.gap,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Photographer:',
+                    style: Style.textStyleDetails,
+                  ),
+                  Text(
+                    data.photographer,
+                    style: Style.textStyleDetails,
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Photographer Url:',
+                    style: Style.textStyleDetails,
+                  ),
+                  GestureDetector(
+                    onTap: () async {
+                      if (await canLaunch(data.photographerUrl)) {
+                        if (!await launch(data.photographerUrl)) {
+                          throw 'Could not launch ${data.photographerUrl}';
+                        }
+                      }
+                    },
+                    child: const Text(
+                      'Explore more on Pexels',
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 25,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Color:',
+                    style: Style.textStyleDetails,
+                  ),
+                  Container(
+                    height: 10,
+                    width: 10,
+                    color: Color(int.parse(
+                        '0xFF${data.avgColor.replaceFirst(RegExp(r'#'), '')}')),
+                  )
+                ],
+              )
+            ],
+          ),
+          Constants.gap,
+          Constants.gap,
+          Constants.gap,
+          const Text(
+            'Description:',
+            style: Style.textStyleDetails,
+          ),
+          Text(
+            data.alt,
+            style: const TextStyle(
+              color: Color(0xFF000000),
+              fontSize: 25,
+            ),
+          ),
+          Constants.gap,
+          Center(
+            child: ElevatedButton(
+              onPressed: () async {
+                if (await canLaunch(data.url)) {
+                  if (!await launch(data.url)) {
+                    throw 'Could not launch ${data.url}';
+                  }
+                }
+              },
+              child: const Text(
+                'Visit on Pexels',
+                style: TextStyle(
+                  fontSize: 25,
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+    ));
   }
 }
