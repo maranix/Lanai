@@ -33,7 +33,10 @@ class CategoryShowCase extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => PhotoDetails(data: photos[index]),
+                      builder: (context) => Hero(
+                        tag: photos[index].id,
+                        child: PhotoDetails(data: photos[index]),
+                      ),
                     ),
                   );
                 },
