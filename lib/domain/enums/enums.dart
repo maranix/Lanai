@@ -1,11 +1,11 @@
-enum PhotoListViewState {
+enum PhotosStatus {
   initial,
   loading,
   loaded,
   error,
 }
 
-enum CollectionListViewState {
+enum VideosStatus {
   initial,
   loading,
   loaded,

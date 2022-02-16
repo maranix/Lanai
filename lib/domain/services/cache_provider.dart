@@ -1,29 +1,22 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-abstract class Cache {}
+abstract class CacheManager {
+  const CacheManager();
 
-// TODO: Refactor cache hit and cache miss logic to an elegant one.
-class ApiCacheProvider {
-  static void cacheRequest(String key, String value) async {
-    final _sharedPreferences = await SharedPreferences.getInstance();
-    _sharedPreferences.setString('cacheTime', DateTime.now().toString());
-    _sharedPreferences.setString(key, value);
-  }
+  /// SharedPreference instance, initially it will be null unless the related,
+  /// manager is needed and called.
+  SharedPreferences? get sharedPreferences => null;
+}
 
-  static Future<String?> getCachedRequest(String key) async {
-    final _sharedPreferences = await SharedPreferences.getInstance();
+// TODO: Implement Api Cache Manager.
+class ApiCache extends CacheManager {
+  /// # ApiCache Manager
+  /// Get the instance of SharedPreferences when instantiating the class,
+  /// Use the provided instance for storing and retrieving api related information.
+  const ApiCache(this.sharedPreferences);
 
-    final _cacheTime = _sharedPreferences.getString('cacheTime');
-
-    if (_cacheTime == null) {
-      return null;
-    } else {
-      final _elapsedTime =
-          DateTime.now().difference(DateTime.parse(_cacheTime)).inHours;
-      if (_elapsedTime >= 4) {
-        await _sharedPreferences.clear();
-      }
-      return _sharedPreferences.getString(key);
-    }
-  }
+  /// [Override] the super classes sharedPreferences attribute and populate it,
+  /// with an actual working instance.
+  @override
+  final SharedPreferences sharedPreferences;
 }
