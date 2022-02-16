@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.r2k.lanai">
+    <!--  Application specific permission  -->
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="lanai"
         android:name="${applicationName}"
