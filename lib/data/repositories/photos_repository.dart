@@ -14,9 +14,11 @@ class PhotosRepository extends PexelsRepository {
 
   final http.Client httpClient;
 
-  Future<Photo> getPhoto() async {
+  // This parameter is only for testing purpose.
+  // Will be removed once actual method is implemented.
+  Future<Photo> getPhoto({int id = 2014422}) async {
     final res = await httpClient.get(
-      Uri.parse('$apiPREFIX/photos/2014422'),
+      Uri.parse('$apiPREFIX/photos/$id'),
       headers: {
         'Authorization': apiKEY,
         'Content-Type': 'application/json',

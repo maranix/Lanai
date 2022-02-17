@@ -11,11 +11,11 @@ class PhotoNotifier extends StateNotifier<Photo> with LocatorMixin {
 
   final PhotosRepository photosRepository;
 
-  Photo? photo;
-
-  void getPhotoById() async {
+  // This parameter is only for testing purpose.
+  // Will be removed once actual method is implemented.
+  Future<void> getPhotoById({int id = 2014422}) async {
     try {
-      state = await photosRepository.getPhoto();
+      state = await photosRepository.getPhoto(id: id);
     } catch (e) {
       state = Photo.error(e.toString());
     }
