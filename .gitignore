@@ -1,3 +1,7 @@
+# Freezed Classes
+*.freezed.dart
+*.g.dart
+
 # Miscellaneous
 *.env
 *.class
