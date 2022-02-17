@@ -30,7 +30,9 @@ jobs:
           channel: 'stable'
 
       - name: Installing Dependencies
-        run: flutter pub get
+        run: |
+          flutter pub get
+          flutter pub run build_runner build --delete-conflicting-outputs
   
       - name: Format
         run: flutter format --set-exit-if-changed lib test
@@ -64,7 +66,9 @@ jobs:
       - run: flutter config --enable-linux-desktop
 
       - name: Installing Dependencies
-        run: flutter pub get
+        run: |
+          flutter pub get
+          flutter pub run build_runner build --delete-conflicting-outputs
   
       - name: Format
         run: flutter format --set-exit-if-changed lib test
@@ -90,7 +94,9 @@ jobs:
           channel: 'stable'
 
       - name: Installing Dependencies
-        run: flutter pub get
+        run: |
+          flutter pub get
+          flutter pub run build_runner build --delete-conflicting-outputs
   
       - name: Format
         run: flutter format --set-exit-if-changed lib test
@@ -115,7 +121,9 @@ jobs:
           channel: 'stable'
 
       - name: Installing Dependencies
-        run: flutter pub get
+        run: |
+          flutter pub get
+          flutter pub run build_runner build --delete-conflicting-outputs
   
       - name: Format
         run: flutter format --set-exit-if-changed lib test
@@ -136,7 +144,9 @@ jobs:
       - run: flutter config --enable-macos-desktop
         
       - name: Installing Dependencies
-        run: flutter pub get
+        run: |
+          flutter pub get
+          flutter pub run build_runner build --delete-conflicting-outputs
   
       - name: Format
         run: flutter format --set-exit-if-changed lib test
@@ -160,7 +170,9 @@ jobs:
       - run: flutter config --enable-windows-desktop
         
       - name: Installing Dependencies
-        run: flutter pub get
+        run: |
+          flutter pub get
+          flutter pub run build_runner build --delete-conflicting-outputs
   
       - name: Format
         run: flutter format --set-exit-if-changed lib test
