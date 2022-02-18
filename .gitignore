@@ -2,6 +2,9 @@
 *.freezed.dart
 *.g.dart
 
+# Mockito generated classes
+*.mocks.dart
+
 # Miscellaneous
 *.env
 *.class
