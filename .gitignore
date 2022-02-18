@@ -5,6 +5,9 @@
 # Mockito generated classes
 *.mocks.dart
 
+# Coverage report
+lcov.info
+
 # Miscellaneous
 *.env
 *.class
