@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lanai/application/constants/constants.dart';
 
 class AppBarSliver extends StatefulWidget {
   const AppBarSliver({Key? key, required this.child}) : super(key: key);
@@ -9,69 +10,118 @@ class AppBarSliver extends StatefulWidget {
 }
 
 class _AppBarSliverState extends State<AppBarSliver> {
+  var top;
+
   @override
   Widget build(BuildContext context) {
     return NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) =>
-            [
-              SliverAppBar(
-                title: const Text(
-                  'Discover',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 50,
-                  ),
-                ),
-                actions: const [
-                  Icon(
-                    Icons.search,
-                    size: 30,
-                    color: Colors.black,
-                  )
-                ],
-                expandedHeight: 500,
-                backgroundColor: Colors.grey.shade50,
-                flexibleSpace: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: FlexibleSpaceBar(
-                    collapseMode: CollapseMode.parallax,
-                    // TODO: Make it react to the height and let it automatically adjust children on scroll.
-                    // Fully collapsed appbar should only show a single row with rounded children for quick and easier navigation.
-                    background: GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 20,
-                        mainAxisSpacing: 20,
-                      ),
-                      itemBuilder: (context, index) => DecoratedBox(
-                        decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(15),
-                            ),
-                            color: Colors.grey),
-                        child: SizedBox(
-                          height: 200,
-                          width: 200,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: const [
-                              Text(
-                                'Name',
-                                style: TextStyle(fontSize: 25),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      itemCount: 10,
-                      scrollDirection: Axis.horizontal,
-                    ),
-                  ),
-                ),
-                elevation: 0,
-              )
-            ],
-        body: widget.child);
+      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) => [
+        SliverAppBar(
+          title: const Text(
+            'Discover',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 50,
+            ),
+          ),
+          actions: const [
+            Icon(
+              Icons.search,
+              size: 30,
+              color: Colors.black,
+            )
+          ],
+          backgroundColor: Colors.grey.shade50,
+          expandedHeight: top == null
+              ? MediaQuery.of(context).size.height * 0.37
+              : top > 240
+                  ? MediaQuery.of(context).size.height * 0.22
+                  : MediaQuery.of(context).size.height * 0.37,
+          flexibleSpace: LayoutBuilder(builder: (context, constraints) {
+            top = constraints.biggest.height;
+
+            return FlexibleSpaceBar(
+              stretchModes: const <StretchMode>[
+                StretchMode.zoomBackground,
+                StretchMode.blurBackground,
+                StretchMode.fadeTitle,
+              ],
+              background: Padding(
+                padding: const EdgeInsets.only(left: 12.0),
+                child: top > 240 ? const ExpandedList() : const CollapsedList(),
+              ),
+            );
+          }),
+          elevation: 0,
+        )
+      ],
+      body: widget.child,
+    );
+  }
+}
+
+class CollapsedList extends StatelessWidget {
+  const CollapsedList({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      itemBuilder: (context, index) => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          SizedBox(),
+          DecoratedBox(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.grey,
+            ),
+            child: SizedBox(
+              height: 80,
+              width: 80,
+            ),
+          ),
+          Text(
+            'Name',
+            style: TextStyle(fontSize: 25),
+          )
+        ],
+      ),
+      separatorBuilder: (context, index) => Constants.gap10w,
+      itemCount: 10,
+      scrollDirection: Axis.horizontal,
+    );
+  }
+}
+
+class ExpandedList extends StatelessWidget {
+  const ExpandedList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      itemBuilder: (context, index) => Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: const [
+          DecoratedBox(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(15.0),
+              ),
+              color: Colors.grey,
+            ),
+            child: SizedBox(
+              height: 200,
+              width: 200,
+            ),
+          ),
+          Text(
+            'Name',
+            style: TextStyle(fontSize: 25),
+          )
+        ],
+      ),
+      separatorBuilder: (context, index) => Constants.gap40w,
+      itemCount: 10,
+      scrollDirection: Axis.horizontal,
+    );
   }
 }
