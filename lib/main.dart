@@ -7,7 +7,7 @@ void main() async {
   runApp(
     DevicePreview(
       /// Only enable in Debug Mode
-      enabled: !kReleaseMode && !kProfileMode,
+      enabled: false,
       builder: (context) => const App(),
     ),
   );
