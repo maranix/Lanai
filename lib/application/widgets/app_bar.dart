@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lanai/application/constants/category_constants.dart';
 import 'package:lanai/application/constants/constants.dart';
 
 class AppBarSliver extends StatefulWidget {
@@ -51,10 +52,8 @@ class _AppBarSliverState extends State<AppBarSliver> {
                 StretchMode.blurBackground,
                 StretchMode.fadeTitle,
               ],
-              background: Padding(
-                padding: const EdgeInsets.only(left: 12.0),
-                child: top > 240 ? const ExpandedList() : const CollapsedList(),
-              ),
+              background:
+                  top > 240 ? const ExpandedList() : const CollapsedList(),
             );
           }),
           elevation: 0,
@@ -70,28 +69,35 @@ class CollapsedList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      itemBuilder: (context, index) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          SizedBox(),
-          DecoratedBox(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.grey,
+      itemBuilder: (context, index) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            DecoratedBox(
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.grey,
+                  image: DecorationImage(
+                    image: AssetImage(
+                      categoriesList.values.elementAt(index),
+                    ),
+                    fit: BoxFit.cover,
+                  )),
+              child: const SizedBox(
+                height: 80,
+                width: 80,
+              ),
             ),
-            child: SizedBox(
-              height: 80,
-              width: 80,
-            ),
-          ),
-          Text(
-            'Name',
-            style: TextStyle(fontSize: 25),
-          )
-        ],
+            Text(
+              categoriesList.keys.elementAt(index),
+              style: const TextStyle(fontSize: 25),
+            )
+          ],
+        ),
       ),
       separatorBuilder: (context, index) => Constants.gap10w,
-      itemCount: 10,
+      itemCount: categoriesList.keys.length,
       scrollDirection: Axis.horizontal,
     );
   }
@@ -103,29 +109,38 @@ class ExpandedList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      itemBuilder: (context, index) => Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: const [
-          DecoratedBox(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(15.0),
+      itemBuilder: (context, index) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            DecoratedBox(
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(15.0),
+                ),
+                color: Colors.grey,
+                image: DecorationImage(
+                  image: AssetImage(
+                    categoriesList.values.elementAt(index),
+                  ),
+                  fit: BoxFit.cover,
+                ),
               ),
-              color: Colors.grey,
+              child: const SizedBox(
+                height: 200,
+                width: 200,
+              ),
             ),
-            child: SizedBox(
-              height: 200,
-              width: 200,
+            Text(
+              categoriesList.keys.elementAt(index),
+              style: const TextStyle(fontSize: 25),
             ),
-          ),
-          Text(
-            'Name',
-            style: TextStyle(fontSize: 25),
-          )
-        ],
+          ],
+        ),
       ),
-      separatorBuilder: (context, index) => Constants.gap40w,
-      itemCount: 10,
+      separatorBuilder: (context, index) => Constants.gap10w,
+      itemCount: categoriesList.keys.length,
       scrollDirection: Axis.horizontal,
     );
   }
