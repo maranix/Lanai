@@ -20,6 +20,9 @@ class PhotosRepository extends PexelsRepository {
         'Authorization': apiKEY,
         'Content-Type': 'application/json',
       },
+    ).timeout(
+      const Duration(seconds: 10),
+      onTimeout: () => http.Response('Request timed out', 408),
     );
 
     if (res.statusCode == 200) {
@@ -43,6 +46,9 @@ class PhotosRepository extends PexelsRepository {
         'Authorization': apiKEY,
         'Content-Type': 'application/json',
       },
+    ).timeout(
+      const Duration(seconds: 10),
+      onTimeout: () => http.Response('Request timed out', 408),
     );
 
     if (res.statusCode == 200) {
