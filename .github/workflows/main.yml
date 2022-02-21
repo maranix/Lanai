@@ -42,7 +42,7 @@ jobs:
         
       - name: Runnin tests and Uploading codecov
         run: |
-          flutter test --no-pub --coverage --test-randomize-ordering-seed random --dart-define=apiKEY=${{ secrets.PEXELS_API_KEY }}
+          flutter test --no-pub --coverage --test-randomize-ordering-seed random
           curl -Os https://uploader.codecov.io/latest/linux/codecov
           chmod +x codecov
           ./codecov
