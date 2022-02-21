@@ -10,11 +10,14 @@ class AppBarSliver extends StatefulWidget {
 }
 
 class _AppBarSliverState extends State<AppBarSliver> {
-  var top;
+  final _scrollController = ScrollController(initialScrollOffset: 0.0);
 
   @override
   Widget build(BuildContext context) {
+    var top = MediaQuery.of(context).size.height * 0.37;
+
     return NestedScrollView(
+      controller: _scrollController,
       headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) => [
         SliverAppBar(
           title: const Text(
@@ -32,13 +35,15 @@ class _AppBarSliverState extends State<AppBarSliver> {
             )
           ],
           backgroundColor: Colors.grey.shade50,
-          expandedHeight: top == null
+          expandedHeight: top > 240
               ? MediaQuery.of(context).size.height * 0.37
-              : top > 240
-                  ? MediaQuery.of(context).size.height * 0.22
-                  : MediaQuery.of(context).size.height * 0.37,
+              : MediaQuery.of(context).size.height * 0.22,
           flexibleSpace: LayoutBuilder(builder: (context, constraints) {
-            top = constraints.biggest.height;
+            if (_scrollController.offset <= 140) {
+              top = MediaQuery.of(context).size.height * 0.37;
+            } else {
+              top = constraints.biggest.height;
+            }
 
             return FlexibleSpaceBar(
               stretchModes: const <StretchMode>[
