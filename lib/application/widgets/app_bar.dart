@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lanai/application/constants/category_constants.dart';
 import 'package:lanai/application/constants/constants.dart';
+import 'package:lanai/application/screens/search_page.dart';
 
 class AppBarSliver extends StatelessWidget {
   const AppBarSliver({Key? key, required this.scrollController})
@@ -59,14 +60,14 @@ class CollapsedList extends StatelessWidget {
           children: [
             DecoratedBox(
               decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.grey,
-                  image: DecorationImage(
-                    image: AssetImage(
-                      categoriesList.values.elementAt(index),
-                    ),
-                    fit: BoxFit.cover,
-                  )),
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  image: AssetImage(
+                    categoriesList.values.elementAt(index),
+                  ),
+                  fit: BoxFit.cover,
+                ),
+              ),
               child: const SizedBox(
                 height: 80,
                 width: 80,
@@ -97,22 +98,33 @@ class ExpandedList extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            DecoratedBox(
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(15.0),
-                ),
-                color: Colors.grey,
-                image: DecorationImage(
-                  image: AssetImage(
-                    categoriesList.values.elementAt(index),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) =>
+                        SearchPage(query: categoriesList.keys.elementAt(index)),
                   ),
-                  fit: BoxFit.cover,
+                );
+              },
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(15.0),
+                  ),
+                  color: Colors.grey,
+                  image: DecorationImage(
+                    image: AssetImage(
+                      categoriesList.values.elementAt(index),
+                    ),
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              child: const SizedBox(
-                height: 200,
-                width: 200,
+                child: const SizedBox(
+                  height: 200,
+                  width: 200,
+                ),
               ),
             ),
             Text(
