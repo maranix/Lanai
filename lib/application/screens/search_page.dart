@@ -10,7 +10,7 @@ import 'package:lanai/domain/services/photos_notifier.dart';
 /// This widget returns a [GridView.custom] with a unique layout.
 ///
 /// ## Required parameters.
-/// __[data]__ : A List<T> which can be of type [PhotoModel], [VideoModel], [CollectionsModel]
+/// __[data]__ : A List<T> which can be of type [PhotoModel], [VideoModel]
 ///
 ///
 class SearchPage extends StatelessWidget {
