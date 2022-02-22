@@ -2,64 +2,47 @@ import 'package:flutter/material.dart';
 import 'package:lanai/application/constants/category_constants.dart';
 import 'package:lanai/application/constants/constants.dart';
 
-class AppBarSliver extends StatefulWidget {
-  const AppBarSliver({Key? key, required this.child}) : super(key: key);
+class AppBarSliver extends StatelessWidget {
+  const AppBarSliver({Key? key, required this.scrollController})
+      : super(key: key);
 
-  final Widget child;
-  @override
-  State<AppBarSliver> createState() => _AppBarSliverState();
-}
-
-class _AppBarSliverState extends State<AppBarSliver> {
-  final _scrollController = ScrollController(initialScrollOffset: 0.0);
+  final ScrollController scrollController;
 
   @override
   Widget build(BuildContext context) {
     var top = MediaQuery.of(context).size.height * 0.37;
 
-    return NestedScrollView(
-      controller: _scrollController,
-      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) => [
-        SliverAppBar(
-          title: const Text(
-            'Discover',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 50,
-            ),
-          ),
-          actions: const [
-            Icon(
-              Icons.search,
-              size: 30,
-              color: Colors.black,
-            )
-          ],
-          backgroundColor: Colors.grey.shade50,
-          expandedHeight: top > 240
-              ? MediaQuery.of(context).size.height * 0.37
-              : MediaQuery.of(context).size.height * 0.22,
-          flexibleSpace: LayoutBuilder(builder: (context, constraints) {
-            if (_scrollController.offset <= 140) {
-              top = MediaQuery.of(context).size.height * 0.37;
-            } else {
-              top = constraints.biggest.height;
-            }
-
-            return FlexibleSpaceBar(
-              stretchModes: const <StretchMode>[
-                StretchMode.zoomBackground,
-                StretchMode.blurBackground,
-                StretchMode.fadeTitle,
-              ],
-              background:
-                  top > 240 ? const ExpandedList() : const CollapsedList(),
-            );
-          }),
-          elevation: 0,
+    return SliverAppBar(
+      title: const Text(
+        'Discover',
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 50,
+        ),
+      ),
+      actions: const [
+        Icon(
+          Icons.search,
+          size: 30,
+          color: Colors.black,
         )
       ],
-      body: widget.child,
+      backgroundColor: Colors.grey.shade50,
+      expandedHeight: top > 240
+          ? MediaQuery.of(context).size.height * 0.37
+          : MediaQuery.of(context).size.height * 0.22,
+      flexibleSpace: LayoutBuilder(builder: (context, constraints) {
+        if (scrollController.offset <= 140) {
+          top = MediaQuery.of(context).size.height * 0.37;
+        } else {
+          top = constraints.biggest.height;
+        }
+
+        return FlexibleSpaceBar(
+          background: top > 240 ? const ExpandedList() : const CollapsedList(),
+        );
+      }),
+      elevation: 0,
     );
   }
 }
