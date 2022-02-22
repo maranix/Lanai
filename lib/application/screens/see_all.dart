@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
-import 'package:lanai/domain/models/photo_model.dart';
+import 'package:lanai/application/utils/see_all_mixing.dart';
 
-class SeeAll extends StatelessWidget {
+class SeeAll extends StatelessWidget with SeeAllMixIn {
   const SeeAll({Key? key, required this.data, this.section}) : super(key: key);
 
   final dynamic data;
@@ -54,10 +54,7 @@ class SeeAll extends StatelessWidget {
                                           Radius.circular(15)),
                                       image: DecorationImage(
                                         image: NetworkImage(
-                                          result.runtimeType == Photo
-                                              ? result.src.portrait
-                                              : result.image,
-                                        ),
+                                            getPreviewImageUrl(result)),
                                         fit: BoxFit.cover,
                                       ),
                                     ),
