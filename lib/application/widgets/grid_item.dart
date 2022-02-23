@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lanai/application/screens/photo_preview_page.dart';
+import 'package:lanai/application/utils/see_all_mixing.dart';
 
-class CuratedPhotosWidget extends StatelessWidget {
-  const CuratedPhotosWidget({Key? key, this.photo}) : super(key: key);
+class GridItem extends StatelessWidget with SeeAllMixIn {
+  const GridItem({Key? key, required this.data}) : super(key: key);
 
-  final dynamic photo;
+  final dynamic data;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class CuratedPhotosWidget extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => PhotoPreviewPage(data: photo),
+            builder: (context) => getPreviewWidget(data),
           ),
         );
       },
@@ -21,7 +21,9 @@ class CuratedPhotosWidget extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(15)),
           image: DecorationImage(
-            image: NetworkImage(photo.src.portrait),
+            image: NetworkImage(
+              getPreviewImageUrl(data),
+            ),
             fit: BoxFit.cover,
           ),
         ),

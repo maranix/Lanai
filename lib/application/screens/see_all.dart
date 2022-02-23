@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:lanai/application/utils/see_all_mixing.dart';
+import 'package:lanai/application/widgets/grid_item.dart';
 
 class SeeAll extends StatelessWidget with SeeAllMixIn {
   const SeeAll({Key? key, required this.data, this.section}) : super(key: key);
@@ -48,17 +49,7 @@ class SeeAll extends StatelessWidget with SeeAllMixIn {
                       sliver: SliverGrid(
                         delegate: SliverChildBuilderDelegate(
                           (context, index) => state[index].mapOrNull(
-                              data: (result) => DecoratedBox(
-                                    decoration: BoxDecoration(
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(15)),
-                                      image: DecorationImage(
-                                        image: NetworkImage(
-                                            getPreviewImageUrl(result)),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
+                              data: (result) => GridItem(data: result),
                               error: (error) => Text(error.error.toString())),
                           childCount: state.length,
                         ),

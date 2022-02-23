@@ -2,8 +2,8 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:lanai/application/widgets/preview_page_fab.dart';
 
-class PreviewPage extends StatelessWidget {
-  const PreviewPage({Key? key, required this.data}) : super(key: key);
+class PhotoPreviewPage extends StatelessWidget {
+  const PhotoPreviewPage({Key? key, required this.data}) : super(key: key);
 
   final dynamic data;
 
