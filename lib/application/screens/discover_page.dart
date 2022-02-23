@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:http/http.dart' as http;
+import 'package:lanai/application/utils/see_all_mixing.dart';
+import 'package:lanai/application/widgets/grid_item.dart';
 import 'package:lanai/data/repositories/photos_repository.dart';
 import 'package:lanai/domain/models/photo_model.dart';
 import 'package:lanai/domain/services/photos_notifier.dart';
@@ -13,8 +15,8 @@ import 'package:lanai/domain/services/photos_notifier.dart';
 /// __[data]__ : A List<T> which can be of type [PhotoModel], [VideoModel]
 ///
 ///
-class SearchPage extends StatelessWidget {
-  const SearchPage({Key? key, required this.query}) : super(key: key);
+class DiscoverPage extends StatelessWidget with SeeAllMixIn {
+  const DiscoverPage({Key? key, required this.query}) : super(key: key);
 
   final String query;
 
@@ -56,18 +58,7 @@ class SearchPage extends StatelessWidget {
                       sliver: SliverGrid(
                         delegate: SliverChildBuilderDelegate(
                           (context, index) => state[index].mapOrNull(
-                              data: (result) => DecoratedBox(
-                                    decoration: BoxDecoration(
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(15)),
-                                      image: DecorationImage(
-                                        image: NetworkImage(
-                                          result.src.portrait,
-                                        ),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
+                              data: (result) => GridItem(data: result),
                               error: (error) => Text(error.error.toString())),
                           childCount: state.length,
                         ),

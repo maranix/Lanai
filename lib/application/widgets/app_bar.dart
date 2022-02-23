@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lanai/application/constants/category_constants.dart';
 import 'package:lanai/application/constants/constants.dart';
-import 'package:lanai/application/screens/search_page.dart';
+import 'package:lanai/application/screens/discover_page.dart';
 
 class AppBarSliver extends StatelessWidget {
   const AppBarSliver({Key? key, required this.scrollController})
@@ -103,8 +103,8 @@ class ExpandedList extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) =>
-                        SearchPage(query: categoriesList.keys.elementAt(index)),
+                    builder: (_) => DiscoverPage(
+                        query: categoriesList.keys.elementAt(index)),
                   ),
                 );
               },
