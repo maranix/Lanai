@@ -47,6 +47,8 @@ dependencies:
     state_notifier: ^0.7.2+1
     flutter_state_notifier: ^0.7.1
     extended_image: ^6.0.1
+    chewie: ^1.3.0
+    video_player: ^2.2.18
 
 dev_dependencies:
     flutter_test:
