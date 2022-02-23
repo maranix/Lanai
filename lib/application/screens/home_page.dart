@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
           AppBarSliver(scrollController: _scrollController),
           SectionWidget(stateNotifier: photoNotifier),
           SectionWidget(stateNotifier: videoNotifier),
-          const SliverToBoxAdapter(child: Constants.gap20h)
+          const SliverToBoxAdapter(child: Constants.gap10h)
         ],
       ),
     );
