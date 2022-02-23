@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lanai/application/constants/category_constants.dart';
 import 'package:lanai/application/constants/constants.dart';
 import 'package:lanai/application/screens/discover_page.dart';
+import 'package:lanai/application/screens/search_page.dart';
 
 class AppBarSliver extends StatelessWidget {
   const AppBarSliver({Key? key, required this.scrollController})
@@ -21,11 +22,21 @@ class AppBarSliver extends StatelessWidget {
           fontSize: 50,
         ),
       ),
-      actions: const [
-        Icon(
-          Icons.search,
-          size: 30,
-          color: Colors.black,
+      actions: [
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const SearchPage(),
+              ),
+            );
+          },
+          child: const Icon(
+            Icons.search,
+            size: 30,
+            color: Colors.black,
+          ),
         )
       ],
       backgroundColor: Colors.grey.shade50,
