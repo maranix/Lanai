@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:lanai/data/constants.dart';
 import 'package:lanai/data/repositories/pexels.dart';
@@ -27,13 +28,19 @@ class PhotosRepository extends PexelsRepository {
 
     if (res.statusCode == 200) {
       final body = jsonDecode(res.body)['photos'] as List;
-      final List<Photo> photos = [];
 
-      for (var i = 0; i < body.length; i++) {
-        photos.add(Photo.fromJson(body[i]));
-      }
+      return compute(
+        (List body) {
+          final List<Photo> photos = [];
 
-      return photos;
+          for (var i = 0; i < body.length; i++) {
+            photos.add(Photo.fromJson(body[i]));
+          }
+
+          return photos;
+        },
+        body,
+      );
     } else {
       throw Exception("Error getting photos: ${res.statusCode}");
     }
@@ -53,13 +60,19 @@ class PhotosRepository extends PexelsRepository {
 
     if (res.statusCode == 200) {
       final body = jsonDecode(res.body)['photos'] as List;
-      final List<Photo> photos = [];
 
-      for (var i = 0; i < body.length; i++) {
-        photos.add(Photo.fromJson(body[i]));
-      }
+      return compute(
+        (List body) {
+          final List<Photo> photos = [];
 
-      return photos;
+          for (var i = 0; i < body.length; i++) {
+            photos.add(Photo.fromJson(body[i]));
+          }
+
+          return photos;
+        },
+        body,
+      );
     } else {
       throw Exception("Error getting curated photos: ${res.statusCode}");
     }

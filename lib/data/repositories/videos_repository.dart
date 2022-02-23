@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:lanai/data/constants.dart';
 import 'package:lanai/data/repositories/pexels.dart';
@@ -27,13 +28,19 @@ class VideosRepository extends PexelsRepository {
 
     if (res.statusCode == 200) {
       final body = jsonDecode(res.body)['videos'] as List;
-      final List<Video> videos = [];
 
-      for (var i = 0; i < body.length; i++) {
-        videos.add(Video.fromJson(body[i]));
-      }
+      return compute(
+        (List body) {
+          final List<Video> videos = [];
 
-      return videos;
+          for (var i = 0; i < body.length; i++) {
+            videos.add(Video.fromJson(body[i]));
+          }
+
+          return videos;
+        },
+        body,
+      );
     } else {
       throw Exception("Error getting videos: ${res.statusCode}");
     }
@@ -53,13 +60,19 @@ class VideosRepository extends PexelsRepository {
 
     if (res.statusCode == 200) {
       final body = jsonDecode(res.body)['videos'] as List;
-      final List<Video> videos = [];
 
-      for (var i = 0; i < body.length; i++) {
-        videos.add(Video.fromJson(body[i]));
-      }
+      return compute(
+        (List body) {
+          final List<Video> videos = [];
 
-      return videos;
+          for (var i = 0; i < body.length; i++) {
+            videos.add(Video.fromJson(body[i]));
+          }
+
+          return videos;
+        },
+        body,
+      );
     } else {
       throw Exception("Error getting popular videos: ${res.statusCode}");
     }
