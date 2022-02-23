@@ -45,7 +45,7 @@ class SectionWidget extends StatelessWidget with SectionMixIn {
           ),
           StateNotifierBuilder<List>(
             stateNotifier: stateNotifier,
-            builder: (context, state, child) => state.isNotEmpty
+            builder: (context, state, child) => state.isNotEmpty || state == []
                 ? Padding(
                     padding: const EdgeInsets.only(left: 12.0),
                     child: SizedBox(
@@ -67,7 +67,7 @@ class SectionWidget extends StatelessWidget with SectionMixIn {
                           );
                         },
                         scrollDirection: Axis.horizontal,
-                        itemCount: 4,
+                        itemCount: state.length > 1 ? 4 : 0,
                       ),
                     ),
                   )
