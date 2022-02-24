@@ -13,7 +13,7 @@ class PhotoNotifier extends StateNotifier<List<Photo>> with LocatorMixin {
   Future<void> search(String query, {int? page = 1}) async {
     try {
       final List<Photo> photos =
-          await _photosRepository.getCuratedPhotos(page: page);
+          await _photosRepository.getPhotoByQuery(query, page: page);
       state = [
         ...state,
         ...photos,
