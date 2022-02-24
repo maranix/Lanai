@@ -12,7 +12,11 @@ class VideosNotifier extends StateNotifier<List<Video>> with LocatorMixin {
 
   Future<void> search(String query, {int? page = 1}) async {
     try {
-      state = await _videosRepository.getVideoByQuery(query, page: page);
+      final videos = await _videosRepository.getPopularVideos(page: page);
+      state = [
+        ...state,
+        ...videos,
+      ];
     } catch (e) {
       state = [
         ...state,
@@ -23,7 +27,11 @@ class VideosNotifier extends StateNotifier<List<Video>> with LocatorMixin {
 
   Future<void> popular({int? page = 1}) async {
     try {
-      state = await _videosRepository.getPopularVideos(page: page);
+      final videos = await _videosRepository.getPopularVideos(page: page);
+      state = [
+        ...state,
+        ...videos,
+      ];
     } catch (e) {
       state = [
         ...state,

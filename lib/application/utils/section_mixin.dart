@@ -21,7 +21,7 @@ mixin SectionMixIn {
       case r'_$PhotoData':
         return CuratedPhotosWidget(photo: state);
       case r'_$VideoData':
-        return PopularVideosWidget(video: state);
+        return PopularVideosWidget(key: Key('$state'), video: state);
       default:
         return const SizedBox.shrink();
     }
