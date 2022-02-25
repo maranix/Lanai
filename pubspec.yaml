@@ -43,7 +43,6 @@ dependencies:
     url_launcher: ^6.0.20
     url_launcher_web: ^2.0.8
     share_plus: ^3.1.0
-    device_preview: ^1.0.0
     state_notifier: ^0.7.2+1
     flutter_state_notifier: ^0.7.1
     extended_image: ^6.0.1
