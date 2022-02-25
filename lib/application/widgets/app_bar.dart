@@ -17,9 +17,10 @@ class AppBarSliver extends StatelessWidget {
             ? 0.75
             : 0.37);
 
-    print(top);
-
     return SliverAppBar(
+      iconTheme: const IconThemeData(
+        color: Colors.black,
+      ),
       title: const Align(
         alignment: Alignment.topLeft,
         child: Text(

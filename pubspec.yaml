@@ -47,7 +47,7 @@ dependencies:
     flutter_state_notifier: ^0.7.1
     extended_image: ^6.0.1
     chewie: ^1.3.0
-    video_player: ^2.2.18
+    video_player: ^2.2.19
     material_floating_search_bar: ^0.3.6
 
 dev_dependencies:
