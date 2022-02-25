@@ -12,14 +12,22 @@ class AppBarSliver extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var top = MediaQuery.of(context).size.height * 0.37;
+    var top = MediaQuery.of(context).size.height *
+        (MediaQuery.of(context).orientation == Orientation.landscape
+            ? 0.75
+            : 0.37);
+
+    print(top);
 
     return SliverAppBar(
-      title: const Text(
-        'Discover',
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 50,
+      title: const Align(
+        alignment: Alignment.topLeft,
+        child: Text(
+          'Discover',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 50,
+          ),
         ),
       ),
       actions: [
@@ -41,11 +49,22 @@ class AppBarSliver extends StatelessWidget {
       ],
       backgroundColor: Colors.grey.shade50,
       expandedHeight: top > 240
-          ? MediaQuery.of(context).size.height * 0.37
-          : MediaQuery.of(context).size.height * 0.22,
+          ? MediaQuery.of(context).size.height *
+              (MediaQuery.of(context).orientation == Orientation.landscape
+                  ? 0.75
+                  : top > 250
+                      ? 0.37
+                      : 0.47)
+          : MediaQuery.of(context).size.height *
+              (MediaQuery.of(context).orientation == Orientation.landscape
+                  ? 0.3
+                  : 0.22),
       flexibleSpace: LayoutBuilder(builder: (context, constraints) {
         if (scrollController.offset <= 140) {
-          top = MediaQuery.of(context).size.height * 0.37;
+          top = MediaQuery.of(context).size.height *
+              (MediaQuery.of(context).orientation == Orientation.landscape
+                  ? 0.75
+                  : 0.37);
         } else {
           top = constraints.biggest.height;
         }

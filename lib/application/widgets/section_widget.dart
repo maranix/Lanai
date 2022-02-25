@@ -67,7 +67,12 @@ class SectionWidget extends StatelessWidget with SectionMixIn {
                           );
                         },
                         scrollDirection: Axis.horizontal,
-                        itemCount: state.length > 1 ? 4 : 0,
+                        itemCount: state.length > 1
+                            ? MediaQuery.of(context).orientation ==
+                                    Orientation.landscape
+                                ? 16
+                                : 4
+                            : 0,
                       ),
                     ),
                   )
