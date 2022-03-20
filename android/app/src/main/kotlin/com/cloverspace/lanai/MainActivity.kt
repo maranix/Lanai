@@ -1,4 +1,4 @@
-package com.r2k.lanai
+package com.cloverspace.lanai
 
 import io.flutter.embedding.android.FlutterActivity
 
