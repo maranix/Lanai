@@ -1,7 +1,6 @@
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:lanai/application/utils/url_launcher.dart';
-import 'package:lanai/domain/models/video_model.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPreviewPage extends StatefulWidget with UrlMixin {

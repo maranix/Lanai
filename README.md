@@ -1,10 +1,14 @@
 # Lanai
 
+<a href="https://play.google.com/store/apps/details?id=com.cloverspace.lanai">
+  <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+       alt="Get it on Google Play"
+       height="80" />
+</a>
+
 [![codecov](https://codecov.io/gh/ramanverma2k/Lanai/branch/main/graph/badge.svg?token=DLKG418V9C)](https://codecov.io/gh/ramanverma2k/Lanai) [![main](https://github.com/ramanverma2k/Lanai/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/ramanverma2k/Lanai/actions/workflows/main.yml)
 
-# Bweather
-
-A cross platform beautiful weather app built using flutter and best practices to ensure scaleability and performance. 
+A Flutter application to display images and play videos using [Pexels API](https://www.pexels.com/api/documentation/).
 
 ## Screenshots
 
