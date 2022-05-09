@@ -19,6 +19,20 @@ class PhotoPreviewPage extends StatelessWidget {
             fit: BoxFit.cover,
             clearMemoryCacheIfFailed: true,
             enableMemoryCache: true,
+            mode: ExtendedImageMode.gesture,
+            initGestureConfigHandler: (state) {
+              return GestureConfig(
+                minScale: 1,
+                animationMinScale: 0.7,
+                maxScale: 3.0,
+                animationMaxScale: 3.5,
+                speed: 1.0,
+                inertialSpeed: 100.0,
+                initialScale: 1.0,
+                inPageView: false,
+                initialAlignment: InitialAlignment.center,
+              );
+            },
           ),
         ],
       ),

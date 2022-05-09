@@ -41,4 +41,10 @@ class PhotoNotifier extends StateNotifier<List<Photo>> with LocatorMixin {
       ];
     }
   }
+
+  @override
+  bool updateShouldNotify(List<Photo> old, List<Photo> current) {
+    /// only update the User content changes, even if using a different instance
+    return old.length != current.length;
+  }
 }

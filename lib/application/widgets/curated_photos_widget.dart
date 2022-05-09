@@ -1,3 +1,4 @@
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:lanai/application/screens/photo_preview_page.dart';
 
@@ -17,14 +18,14 @@ class CuratedPhotosWidget extends StatelessWidget {
           ),
         );
       },
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(15)),
-          image: DecorationImage(
-            image: NetworkImage(photo.src.portrait),
-            fit: BoxFit.cover,
-          ),
-        ),
+      child: ExtendedImage.network(
+        photo.src.portrait,
+        width: 400,
+        height: 400,
+        fit: BoxFit.fill,
+        cache: true,
+        shape: BoxShape.rectangle,
+        borderRadius: const BorderRadius.all(Radius.circular(15.0)),
       ),
     );
   }

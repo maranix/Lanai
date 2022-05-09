@@ -9,9 +9,14 @@ import 'package:lanai/domain/models/photo_model.dart';
 import 'package:lanai/domain/services/photos_notifier.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
-class SearchPage extends StatelessWidget {
+class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
 
+  @override
+  State<SearchPage> createState() => _SearchPageState();
+}
+
+class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     final photoNotifier = PhotoNotifier(PhotosRepository(http.Client()));
@@ -62,9 +67,12 @@ class SearchPage extends StatelessWidget {
                         ],
                       ),
                     )
-                  : const Positioned.fill(
+                  : Positioned.fill(
                       child: Center(
-                        child: CircularProgressIndicator.adaptive(),
+                        child: Text(
+                          'Try searching for something',
+                          style: Theme.of(context).textTheme.displaySmall,
+                        ),
                       ),
                     );
             },

@@ -3,13 +3,12 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:lanai/data/constants.dart';
-import 'package:lanai/data/repositories/pexels.dart';
 import 'package:lanai/domain/models/video_model.dart';
 
 /// # VideosRepository
 /// The following class extends upon the base PexelsRepository to retrieve videos
 /// from Pexels.
-class VideosRepository extends PexelsRepository {
+class VideosRepository {
   const VideosRepository(this.httpClient);
 
   final http.Client httpClient;

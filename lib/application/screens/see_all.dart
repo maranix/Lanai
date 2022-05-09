@@ -65,7 +65,7 @@ class _SeeAllState extends State<SeeAll> {
                 color: Colors.black,
               ),
             ),
-            backgroundColor: Colors.grey.shade50,
+            backgroundColor: Colors.white,
             elevation: 0,
           ),
           StateNotifierBuilder<List>(

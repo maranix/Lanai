@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:lanai/application/constants/category_constants.dart';
 import 'package:lanai/application/constants/constants.dart';
 import 'package:lanai/application/screens/about_page.dart';
+import 'package:lanai/application/screens/discover_page.dart';
 import 'package:lanai/application/screens/legal_page.dart';
+import 'package:lanai/application/screens/search_page.dart';
 import 'package:lanai/application/theme/style.dart';
-import 'package:lanai/application/widgets/app_bar.dart';
 import 'package:lanai/application/widgets/section_widget.dart';
 import 'package:lanai/data/repositories/photos_repository.dart';
 import 'package:lanai/data/repositories/videos_repository.dart';
@@ -22,17 +24,53 @@ class HomePage extends StatelessWidget {
     photoNotifier.curated();
     videoNotifier.popular();
 
-    final _scrollController = ScrollController();
-
     return Scaffold(
-      body: CustomScrollView(
-        controller: _scrollController,
-        slivers: [
-          AppBarSliver(scrollController: _scrollController),
-          SectionWidget(stateNotifier: photoNotifier),
-          SectionWidget(stateNotifier: videoNotifier),
-          const SliverToBoxAdapter(child: Constants.gap10h)
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        iconTheme: const IconThemeData(
+          color: Colors.black,
+        ),
+        title: const Align(
+          alignment: Alignment.topLeft,
+          child: Text(
+            'Discover',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 50,
+            ),
+          ),
+        ),
+        actions: [
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SearchPage(),
+                ),
+              );
+            },
+            child: const Icon(
+              Icons.search,
+              size: 30,
+              color: Colors.black,
+            ),
+          )
         ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.3,
+              child: const _CategoriesList(),
+            ),
+            SectionWidget(stateNotifier: photoNotifier),
+            SectionWidget(stateNotifier: videoNotifier),
+            Constants.gap10h,
+          ],
+        ),
       ),
       drawer: Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
@@ -96,6 +134,60 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _CategoriesList extends StatelessWidget {
+  const _CategoriesList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      itemBuilder: (context, index) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => DiscoverPage(
+                        query: categoriesList.keys.elementAt(index)),
+                  ),
+                );
+              },
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(15.0),
+                  ),
+                  color: Colors.grey,
+                  image: DecorationImage(
+                    image: AssetImage(
+                      categoriesList.values.elementAt(index),
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: const SizedBox(
+                  height: 200,
+                  width: 200,
+                ),
+              ),
+            ),
+            Text(
+              categoriesList.keys.elementAt(index),
+              style: const TextStyle(fontSize: 25),
+            ),
+          ],
+        ),
+      ),
+      separatorBuilder: (context, index) => Constants.gap10w,
+      itemCount: categoriesList.keys.length,
+      scrollDirection: Axis.horizontal,
     );
   }
 }

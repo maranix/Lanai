@@ -11,77 +11,75 @@ class SectionWidget extends StatelessWidget with SectionMixIn {
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  getSectionString(stateNotifier),
-                  style: const TextStyle(fontSize: 45),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                getSectionString(stateNotifier),
+                style: const TextStyle(fontSize: 45),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SeeAll(
+                          data: stateNotifier,
+                          section: getSectionString(stateNotifier)),
+                    ),
+                  );
+                },
+                child: const Text(
+                  'See All',
+                  style: TextStyle(fontSize: 20, color: Colors.lightBlue),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SeeAll(
-                            data: stateNotifier,
-                            section: getSectionString(stateNotifier)),
+              )
+            ],
+          ),
+        ),
+        StateNotifierBuilder<List>(
+          stateNotifier: stateNotifier,
+          builder: (context, state, child) => state.isNotEmpty || state == []
+              ? Padding(
+                  padding: const EdgeInsets.only(left: 12.0),
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.45,
+                    child: GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 15,
+                        crossAxisSpacing: 10,
                       ),
-                    );
-                  },
-                  child: const Text(
-                    'See All',
-                    style: TextStyle(fontSize: 20, color: Colors.lightBlue),
+                      itemBuilder: (context, index) {
+                        return state[index].map(
+                          data: (data) => getGridWidget(data, index),
+                          error: (error) => Text(error.error.toString()),
+                          loading: (value) {
+                            return Text('$value');
+                          },
+                        );
+                      },
+                      scrollDirection: Axis.horizontal,
+                      itemCount: state.length > 1
+                          ? MediaQuery.of(context).orientation ==
+                                  Orientation.landscape
+                              ? 16
+                              : 6
+                          : 0,
+                    ),
                   ),
                 )
-              ],
-            ),
-          ),
-          StateNotifierBuilder<List>(
-            stateNotifier: stateNotifier,
-            builder: (context, state, child) => state.isNotEmpty || state == []
-                ? Padding(
-                    padding: const EdgeInsets.only(left: 12.0),
-                    child: SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.45,
-                      child: GridView.builder(
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 15,
-                          crossAxisSpacing: 10,
-                        ),
-                        itemBuilder: (context, index) {
-                          return state[index].map(
-                            data: (data) => getGridWidget(data, index),
-                            error: (error) => Text(error.error.toString()),
-                            loading: (value) {
-                              return Text('$value');
-                            },
-                          );
-                        },
-                        scrollDirection: Axis.horizontal,
-                        itemCount: state.length > 1
-                            ? MediaQuery.of(context).orientation ==
-                                    Orientation.landscape
-                                ? 16
-                                : 4
-                            : 0,
-                      ),
-                    ),
-                  )
-                : const Center(
-                    child: CircularProgressIndicator.adaptive(),
-                  ),
-          ),
-        ],
-      ),
+              : const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                ),
+        ),
+      ],
     );
   }
 }
