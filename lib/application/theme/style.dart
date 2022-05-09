@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class Style {
   static const textStyleHeading = TextStyle(
@@ -27,5 +27,12 @@ class Style {
   static const textStyleAboutPage = TextStyle(
     color: Color(0xFF000000),
     fontSize: 20,
+  );
+}
+
+class MyTheme {
+  static final light = ThemeData(
+    fontFamily: 'Dongle',
+    scaffoldBackgroundColor: Colors.white,
   );
 }

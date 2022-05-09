@@ -1,3 +1,13 @@
+# Freezed Classes
+*.freezed.dart
+*.g.dart
+
+# Mockito generated classes
+*.mocks.dart
+
+# Coverage report
+lcov.info
+
 # Miscellaneous
 *.env
 *.class

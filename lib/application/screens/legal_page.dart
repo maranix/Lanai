@@ -61,15 +61,12 @@ class LegalPage extends StatelessWidget {
                     text: '4. Image Url links back to the image on Pexels.\n\n',
                   ),
                   TextSpan(
-                    text: '5. No option to download or save images.\n\n',
+                    text:
+                        '5. No option to download or save images, This is not a Gallery or Wallpaper app.\n\n',
                   ),
                   TextSpan(
                     text:
                         '6. If the user wants to download the image then they must go to the Pexels website and download from there.\n\n',
-                  ),
-                  TextSpan(
-                    text:
-                        '7. Inorder to not abuse the API, the responses are cached and are valid for 4 hours.\n\n',
                   ),
                 ],
               ),
