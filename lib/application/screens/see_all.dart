@@ -134,12 +134,12 @@ class _SeeAllState extends State<SeeAll> {
                       isBottom = false;
                     });
                   },
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(15))),
                   child: const Text(
                     'Load More',
                     style: TextStyle(fontSize: 20),
                   ),
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(15))),
                 ),
               ),
             )

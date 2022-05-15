@@ -149,32 +149,31 @@ class _CategoriesList extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => DiscoverPage(
-                        query: categoriesList.keys.elementAt(index)),
-                  ),
-                );
-              },
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(15.0),
-                  ),
-                  color: Colors.grey,
-                  image: DecorationImage(
-                    image: AssetImage(
-                      categoriesList.values.elementAt(index),
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => DiscoverPage(
+                          query: categoriesList.keys.elementAt(index)),
                     ),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                child: const SizedBox(
-                  height: 200,
+                  );
+                },
+                child: Container(
                   width: 200,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(15.0),
+                    ),
+                    color: Colors.grey,
+                    image: DecorationImage(
+                      image: AssetImage(
+                        categoriesList.values.elementAt(index),
+                      ),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ),
             ),
