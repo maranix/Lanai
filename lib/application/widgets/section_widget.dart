@@ -49,30 +49,53 @@ class SectionWidget extends StatelessWidget with SectionMixIn {
                   padding: const EdgeInsets.only(left: 12.0),
                   child: SizedBox(
                     height: MediaQuery.of(context).size.height * 0.45,
-                    child: GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 15,
-                        crossAxisSpacing: 10,
-                      ),
-                      itemBuilder: (context, index) {
-                        return state[index].map(
-                          data: (data) => getGridWidget(data, index),
-                          error: (error) => Text(error.error.toString()),
-                          loading: (value) {
-                            return Text('$value');
+                    child: LayoutBuilder(builder: (context, constraints) {
+                      if (constraints.maxWidth > 1200) {
+                        return GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 15,
+                            crossAxisSpacing: 10,
+                          ),
+                          itemBuilder: (context, index) {
+                            return state[index].map(
+                              data: (data) => getGridWidget(data, index),
+                              error: (error) => Text(error.error.toString()),
+                              loading: (value) {
+                                return Text('$value');
+                              },
+                            );
                           },
+                          scrollDirection: Axis.horizontal,
+                          itemCount: state.length > 1 ? 20 : 0,
                         );
-                      },
-                      scrollDirection: Axis.horizontal,
-                      itemCount: state.length > 1
-                          ? MediaQuery.of(context).orientation ==
-                                  Orientation.landscape
-                              ? 16
-                              : 6
-                          : 0,
-                    ),
+                      }
+                      return GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 15,
+                          crossAxisSpacing: 10,
+                        ),
+                        itemBuilder: (context, index) {
+                          return state[index].map(
+                            data: (data) => getGridWidget(data, index),
+                            error: (error) => Text(error.error.toString()),
+                            loading: (value) {
+                              return Text('$value');
+                            },
+                          );
+                        },
+                        scrollDirection: Axis.horizontal,
+                        itemCount: state.length > 1
+                            ? MediaQuery.of(context).orientation ==
+                                    Orientation.landscape
+                                ? 16
+                                : 6
+                            : 0,
+                      );
+                    }),
                   ),
                 )
               : const Center(

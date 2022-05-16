@@ -94,18 +94,31 @@ class _SeeAllState extends State<SeeAll> {
                               error: (error) => Text(error.error.toString())),
                           childCount: state.length,
                         ),
-                        gridDelegate: SliverQuiltedGridDelegate(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
-                          repeatPattern: QuiltedGridRepeatPattern.inverted,
-                          pattern: const [
-                            QuiltedGridTile(1, 2),
-                            QuiltedGridTile(1, 1),
-                            QuiltedGridTile(2, 1),
-                            QuiltedGridTile(1, 1),
-                          ],
-                        ),
+                        gridDelegate: MediaQuery.of(context).size.width < 600
+                            ? SliverQuiltedGridDelegate(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 10,
+                                mainAxisSpacing: 10,
+                                repeatPattern:
+                                    QuiltedGridRepeatPattern.inverted,
+                                pattern: const [
+                                  QuiltedGridTile(1, 2),
+                                  QuiltedGridTile(1, 1),
+                                  QuiltedGridTile(2, 1),
+                                  QuiltedGridTile(1, 1),
+                                ],
+                              )
+                            : MediaQuery.of(context).size.width < 1200
+                                ? const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 4,
+                                    crossAxisSpacing: 10,
+                                    mainAxisSpacing: 10,
+                                  )
+                                : const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 8,
+                                    crossAxisSpacing: 10,
+                                    mainAxisSpacing: 10,
+                                  ),
                       ),
                     )
                   : const SliverFillViewport(
