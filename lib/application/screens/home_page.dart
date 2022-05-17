@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:lanai/application/constants/category_constants.dart';
@@ -67,15 +69,13 @@ class HomePage extends StatelessWidget {
               child: const _CategoriesList(),
             ),
             SectionWidget(stateNotifier: photoNotifier),
-            SectionWidget(stateNotifier: videoNotifier),
-            Constants.gap10h,
+            Platform.isIOS || Platform.isAndroid
+                ? SectionWidget(stateNotifier: videoNotifier)
+                : const SizedBox.shrink(),
           ],
         ),
       ),
       drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
