@@ -1,10 +1,10 @@
 import 'package:share_plus/share_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 mixin UrlMixin {
   void openUrl(String url) async {
-    if (await canLaunch(url)) {
-      if (!await launch(url)) {
+    if (await canLaunchUrlString(url)) {
+      if (!await launchUrlString(url)) {
         throw 'Could not launch $url';
       }
     }

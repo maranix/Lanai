@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:lanai/application/constants/category_constants.dart';
@@ -67,15 +69,13 @@ class HomePage extends StatelessWidget {
               child: const _CategoriesList(),
             ),
             SectionWidget(stateNotifier: photoNotifier),
-            SectionWidget(stateNotifier: videoNotifier),
-            Constants.gap10h,
+            Platform.isIOS || Platform.isAndroid
+                ? SectionWidget(stateNotifier: videoNotifier)
+                : const SizedBox.shrink(),
           ],
         ),
       ),
       drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -149,32 +149,31 @@ class _CategoriesList extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => DiscoverPage(
-                        query: categoriesList.keys.elementAt(index)),
-                  ),
-                );
-              },
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(15.0),
-                  ),
-                  color: Colors.grey,
-                  image: DecorationImage(
-                    image: AssetImage(
-                      categoriesList.values.elementAt(index),
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => DiscoverPage(
+                          query: categoriesList.keys.elementAt(index)),
                     ),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                child: const SizedBox(
-                  height: 200,
+                  );
+                },
+                child: Container(
                   width: 200,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(15.0),
+                    ),
+                    color: Colors.grey,
+                    image: DecorationImage(
+                      image: AssetImage(
+                        categoriesList.values.elementAt(index),
+                      ),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ),
             ),
