@@ -82,7 +82,7 @@ Run the app
 ## License
 
 ```
-Copyright (c) 2021 Raman Verma
+Copyright (c) 2022 Raman Verma
 
 
 Permission is hereby granted, free of charge, to any
