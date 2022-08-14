@@ -18,12 +18,67 @@ linter:
   #
   # Instead of disabling a lint rule for the entire project in the
   # section below, it can also be suppressed for a single line of code
-  # or a specific dart file by using the `// ignore: name_of_lint` and
   # `// ignore_for_file: name_of_lint` syntax on the line or in the file
   # producing the lint.
+  # or a specific dart file by using the `// ignore: name_of_lint` and
   rules:
-    # avoid_print: false  # Uncomment to disable the `avoid_print` rule
-    # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
+    - directives_ordering
+    - one_member_abstracts
+    - only_throw_errors
+    - package_api_docs
+    - parameter_assignments
+    - prefer_asserts_in_initializer_lists
+    - prefer_asserts_with_message
+    - prefer_constructors_over_static_methods
+    - prefer_final_in_for_each
+    - prefer_final_locals
+    - prefer_if_elements_to_conditional_expressions
+    - prefer_if_null_operators
+    - require_trailing_commas
+    - sized_box_shrink_expand
+    - slash_for_doc_comments
+    - sort_constructors_first
+    - sort_unnamed_constructors_first
+    - tighten_type_of_initializing_formals
+    - type_annotate_public_apis
+    - unawaited_futures
+    - unnecessary_await_in_return
+    - unnecessary_lambdas
+    - unnecessary_null_checks
+    - unnecessary_parenthesis
+    - unnecessary_raw_strings
+    - unnecessary_string_escapes
+    - use_colored_box
+    - use_decorated_box
+    - use_enums
+    - use_late_for_private_fields_and_variables
+    - use_named_constants
+    - use_raw_strings
+    - use_setters_to_change_properties
+    - use_super_parameters
+    - use_test_throws_matchers
+    - use_to_and_as_if_applicable
+    - secure_pubspec_urls
+    - sort_pub_dependencies
+    - avoid_annotating_with_dynamic
+    - avoid_dynamic_calls
+    - avoid_returning_null_for_future
+    - avoid_slow_async_io
+    - avoid_type_to_string
+    - avoid_classes_with_only_static_members
+    - avoid_equals_and_hash_code_on_mutable_classes
+    - avoid_field_initializers_in_const_classes
+    - avoid_final_parameters
+    - avoid_implementing_value_types
+    - avoid_init_to_null
+    - cancel_subscriptions
+    - close_sinks
+    - comment_references
+    - hash_and_equals
+    - invariant_booleans
+    - literal_only_boolean_expressions
+    - test_types_in_equals
+    - cascade_invocations
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
