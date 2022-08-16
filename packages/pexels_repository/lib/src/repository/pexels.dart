@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:pexels_repository/src/model/photo.dart';
+import 'package:pexels_repository/src/model/pexels_photo.dart';
 import 'package:pexels_repository/src/repository/repository.dart';
 
 class PexelsRepository implements Repository {
@@ -10,7 +10,7 @@ class PexelsRepository implements Repository {
   final http.Client _client;
 
   @override
-  Future<PhotoList> getCuratedPhotos() async {
+  Future<PexelsPhotoList> getCuratedPhotos() async {
     final http.Response response = await _client.get(
       Uri.parse("https://api.pexels.com/v1/curated"),
       headers: <String, String>{
@@ -25,7 +25,7 @@ class PexelsRepository implements Repository {
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body);
 
-      final PhotoList photoList = PhotoList.fromJson(json);
+      final PexelsPhotoList photoList = PexelsPhotoList.fromJson(json);
 
       return photoList;
     } else {
@@ -34,7 +34,7 @@ class PexelsRepository implements Repository {
   }
 
   @override
-  Future<Photo> getPhotoById({required String id}) async {
+  Future<PexelsPhoto> getPhotoById({required String id}) async {
     final http.Response response = await _client.get(
       Uri.parse("https://api.pexels.com/v1/photos/$id"),
       headers: <String, String>{
@@ -49,14 +49,14 @@ class PexelsRepository implements Repository {
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body);
 
-      return Photo.fromJson(json);
+      return PexelsPhoto.fromJson(json);
     } else {
       throw Exception("Error getting photos: ${response.statusCode}");
     }
   }
 
   @override
-  Future<PhotoList> getPhotosByQuery(
+  Future<PexelsPhotoList> getPhotosByQuery(
       {required String query, int? page = 1}) async {
     final http.Response response = await _client.get(
       Uri.parse("https://api.pexels.com/v1/search?query=$query"),
@@ -72,7 +72,7 @@ class PexelsRepository implements Repository {
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body);
 
-      final PhotoList photoList = PhotoList.fromJson(json);
+      final PexelsPhotoList photoList = PexelsPhotoList.fromJson(json);
 
       return photoList;
     } else {

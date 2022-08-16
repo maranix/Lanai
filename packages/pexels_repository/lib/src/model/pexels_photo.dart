@@ -1,21 +1,21 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'photo.freezed.dart';
-part 'photo.g.dart';
+part 'pexels_photo.freezed.dart';
+part 'pexels_photo.g.dart';
 
 @freezed
-class PhotoList with _$PhotoList {
-  const factory PhotoList({
-    required List<Photo> photos,
+class PexelsPhotoList with _$PexelsPhotoList {
+  const factory PexelsPhotoList({
+    required List<PexelsPhoto> photos,
   }) = _PhotoList;
 
-  factory PhotoList.fromJson(Map<String, Object?> json) =>
-      _$PhotoListFromJson(json);
+  factory PexelsPhotoList.fromJson(Map<String, Object?> json) =>
+      _$PexelsPhotoListFromJson(json);
 }
 
 @freezed
-class Photo with _$Photo {
-  const factory Photo({
+class PexelsPhoto with _$PexelsPhoto {
+  const factory PexelsPhoto({
     required int id,
     required int width,
     required int height,
@@ -26,9 +26,10 @@ class Photo with _$Photo {
     required String avg_color,
     required Src src,
     required String alt,
-  }) = _Photo;
+  }) = _PexelsPhoto;
 
-  factory Photo.fromJson(Map<String, Object?> json) => _$PhotoFromJson(json);
+  factory PexelsPhoto.fromJson(Map<String, Object?> json) =>
+      _$PexelsPhotoFromJson(json);
 }
 
 @freezed

@@ -1,17 +1,18 @@
-import 'package:pexels_repository/src/model/photo.dart';
+import 'package:pexels_repository/src/model/pexels_photo.dart';
 
 abstract class Repository {
   const Repository();
 
-  Future<PhotoList> getCuratedPhotos() {
+  Future<PexelsPhotoList> getCuratedPhotos() {
     throw UnimplementedError();
   }
 
-  Future<PhotoList> getPhotosByQuery({required String query, int? page = 1}) {
+  Future<PexelsPhotoList> getPhotosByQuery(
+      {required String query, int? page = 1}) {
     throw UnimplementedError();
   }
 
-  Future<Photo> getPhotoById({required String id}) {
+  Future<PexelsPhoto> getPhotoById({required String id}) {
     throw UnimplementedError();
   }
 }
