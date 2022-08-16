@@ -1,5 +1,8 @@
 # Lanai
 
+> **Note**
+> V4 is in Development with a complete UI Overhaul and new features.
+
 <a href="https://play.google.com/store/apps/details?id=com.cloverspace.lanai">
   <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
        alt="Get it on Google Play"
