@@ -37,6 +37,10 @@ dependencies:
   bloc: ^8.1.0
   flutter_bloc: ^8.0.1
 
+  pexels_repository:
+    path: ./packages/pexels_repository
+  equatable: ^2.0.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
