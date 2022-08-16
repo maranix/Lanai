@@ -9,7 +9,7 @@
        height="80" />
 </a>
 
-[![codecov](https://codecov.io/gh/ramanverma2k/Lanai/branch/main/graph/badge.svg?token=DLKG418V9C)](https://codecov.io/gh/ramanverma2k/Lanai) [![main](https://github.com/ramanverma2k/Lanai/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/ramanverma2k/Lanai/actions/workflows/main.yml)
+[![codecov](https://codecov.io/gh/ramanverma2k/Lanai/branch/main/graph/badge.svg?token=DLKG418V9C)](https://codecov.io/gh/ramanverma2k/Lanai)
 
 A Flutter application to display images and play videos using [Pexels API](https://www.pexels.com/api/documentation/).
 
