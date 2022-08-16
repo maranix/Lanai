@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:pixabay_repository/src/constants.dart';
 import 'package:pixabay_repository/src/model/pixabay_photo.dart';
 import 'package:pixabay_repository/src/repository/repository.dart';
 
