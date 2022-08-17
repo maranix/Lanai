@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lanai/home/home.dart';
 
 class LanaiApp extends StatelessWidget {
   const LanaiApp({super.key});
@@ -6,7 +7,10 @@ class LanaiApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Container(),
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
+      ),
+      home: const HomePage(),
     );
   }
 }
