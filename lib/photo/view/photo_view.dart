@@ -23,12 +23,25 @@ class PhotoView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 35,
-                  fontWeight: FontWeight.w900,
-                ),
+              Row(
+                children: [
+                  InkWell(
+                    onTap: () => Navigator.pop(context),
+                    borderRadius: BorderRadius.circular(15),
+                    child: const Icon(
+                      Icons.arrow_back_rounded,
+                      size: 35,
+                    ),
+                  ),
+                  const SizedBox.square(dimension: 20),
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 35,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 20),
               const Expanded(child: PhotoListView()),
