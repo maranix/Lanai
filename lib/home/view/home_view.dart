@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:lanai/photo/photo.dart';
 
 /// {@template home_view}
 /// Define your HomePage body/ui structure here.
@@ -53,8 +54,8 @@ class UpperSection extends StatelessWidget {
         const SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
-            Text(
+          children: [
+            const Text(
               'Curated',
               style: TextStyle(
                 fontSize: 25,
@@ -62,8 +63,11 @@ class UpperSection extends StatelessWidget {
               ),
             ),
             TextButton(
-              onPressed: null,
-              child: Text('See All'),
+              onPressed: () => Navigator.push(
+                context,
+                PhotoPage.route(title: "Curated"),
+              ),
+              child: const Text('See All'),
             ),
           ],
         ),
