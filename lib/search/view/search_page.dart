@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pexels_repository/search/search.dart';
+import 'package:lanai/search/search.dart';
 import './search_view.dart';
 
 /// {@template search_page}
@@ -15,10 +15,12 @@ class SearchPage extends StatelessWidget {
   /// Navigator.push(SearchPage.route());
   /// `
   static Route<SearchPage> route() {
-    return MaterialPageRoute<SearchPage>(builder: (_) => const SearchPage(),);
+    return MaterialPageRoute<SearchPage>(
+      builder: (_) => const SearchPage(),
+    );
   }
 
-    @override
+  @override
   Widget build(BuildContext context) {
     return BlocProvider<SearchBloc>(
       create: (BuildContext context) => SearchBloc(),
