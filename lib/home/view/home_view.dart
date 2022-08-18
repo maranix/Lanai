@@ -44,12 +44,28 @@ class UpperSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        const Text(
-          'Pexels',
-          style: TextStyle(
-            fontSize: 35,
-            fontWeight: FontWeight.w900,
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              'Pexels',
+              style: TextStyle(
+                fontSize: 35,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+            PopupMenuButton(
+              elevation: 0,
+              itemBuilder: (context) => [
+                const PopupMenuItem<String>(
+                  child: Text('Settings'),
+                ),
+                const PopupMenuItem<String>(
+                  child: Text('Favourites'),
+                ),
+              ],
+            ),
+          ],
         ),
         const SizedBox(height: 20),
         Row(
