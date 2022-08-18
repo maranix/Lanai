@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:shimmer/shimmer.dart';
 
+import './photo_preview.dart';
+
 /// {@template photo_view}
 /// Define your PhotoPage body/ui structure here.
 /// {@endtemplate}
@@ -55,8 +57,14 @@ class PhotoListView extends StatelessWidget {
         ],
       ),
       childrenDelegate: SliverChildBuilderDelegate(
-        (context, index) => PhotoListViewItem(
-          key: ValueKey(index),
+        (context, index) => GestureDetector(
+          onTap: () => Navigator.push(
+            context,
+            PhotoPreview.route(),
+          ),
+          child: PhotoListViewItem(
+            key: ValueKey(index),
+          ),
         ),
         childCount: 1000,
       ),
@@ -73,8 +81,7 @@ class PhotoListViewItem extends StatefulWidget {
   State<PhotoListViewItem> createState() => _PhotoListViewItemState();
 }
 
-class _PhotoListViewItemState extends State<PhotoListViewItem>
-    with SingleTickerProviderStateMixin {
+class _PhotoListViewItemState extends State<PhotoListViewItem> with SingleTickerProviderStateMixin {
   late final AnimationController _animationController;
   late final Animation<double> _scaleAnimation;
 
@@ -87,8 +94,7 @@ class _PhotoListViewItemState extends State<PhotoListViewItem>
       duration: const Duration(milliseconds: 500),
     );
 
-    _scaleAnimation =
-        Tween<double>(begin: 0.5, end: 1.0).animate(_animationController);
+    _scaleAnimation = Tween<double>(begin: 0.5, end: 1.0).animate(_animationController);
 
     Future.delayed(
       const Duration(milliseconds: 50),
