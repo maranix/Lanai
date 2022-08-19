@@ -50,8 +50,8 @@ class UpperSection extends StatelessWidget {
             const Text(
               'Pexels',
               style: TextStyle(
-                fontSize: 35,
-                fontWeight: FontWeight.w900,
+                fontSize: 45,
+                fontWeight: FontWeight.bold,
               ),
             ),
             PopupMenuButton(
@@ -67,7 +67,6 @@ class UpperSection extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -75,7 +74,7 @@ class UpperSection extends StatelessWidget {
               'Curated',
               style: TextStyle(
                 fontSize: 25,
-                fontWeight: FontWeight.w900,
+                fontWeight: FontWeight.w600,
               ),
             ),
             TextButton(
@@ -104,7 +103,7 @@ class UpperSection extends StatelessWidget {
           'Categories',
           style: TextStyle(
             fontSize: 25,
-            fontWeight: FontWeight.w900,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ],
