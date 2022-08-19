@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:pixabay_repository/src/constants.dart';
 import 'package:pixabay_repository/src/model/pixabay_photo.dart';
 import 'package:pixabay_repository/src/repository/repository.dart';
 
@@ -9,6 +8,8 @@ class PixabayRepository implements Repository {
   const PixabayRepository({required http.Client client}) : _client = client;
 
   final http.Client _client;
+
+  static const String _apiKEY = String.fromEnvironment("pixabayKEY");
 
   @override
   Future<PixabayPhotoList> getPhotosByQuery({
@@ -18,7 +19,7 @@ class PixabayRepository implements Repository {
 
     final http.Response response = await _client.get(
       Uri.parse(
-        "https://pixabay.com/api/?key=$pixabayKEY&q=$q&image_type=all",
+        "https://pixabay.com/api/?key=$_apiKEY&q=$q&image_type=all",
       ),
     );
 

@@ -3,19 +3,20 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:pexels_repository/src/model/pexels_photo.dart';
 import 'package:pexels_repository/src/repository/repository.dart';
-import 'package:pexels_repository/src/constants.dart';
 
 class PexelsRepository implements Repository {
   const PexelsRepository({required http.Client client}) : _client = client;
 
   final http.Client _client;
 
+  static const String _apiKEY = String.fromEnvironment("pexelsKEY");
+
   @override
   Future<PexelsPhotoList> getCuratedPhotos() async {
     final http.Response response = await _client.get(
       Uri.parse("https://api.pexels.com/v1/curated"),
       headers: <String, String>{
-        'Authorization': pexelsKEY,
+        'Authorization': _apiKEY,
         'Content-Type': 'application/json',
       },
     ).timeout(
@@ -39,7 +40,7 @@ class PexelsRepository implements Repository {
     final http.Response response = await _client.get(
       Uri.parse("https://api.pexels.com/v1/photos/$id"),
       headers: <String, String>{
-        'Authorization': pexelsKEY,
+        'Authorization': _apiKEY,
         'Content-Type': 'application/json',
       },
     ).timeout(
@@ -62,7 +63,7 @@ class PexelsRepository implements Repository {
     final http.Response response = await _client.get(
       Uri.parse("https://api.pexels.com/v1/search?query=$query"),
       headers: <String, String>{
-        'Authorization': pexelsKEY,
+        'Authorization': _apiKEY,
         'Content-Type': 'application/json',
       },
     ).timeout(

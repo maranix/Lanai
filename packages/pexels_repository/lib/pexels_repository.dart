@@ -5,5 +5,6 @@ library pexels_repository;
 
 export './src/model/pexels_photo.dart';
 export './src/repository/pexels.dart';
+export 'package:http/http.dart';
 
 // TODO: Export any libraries intended for clients of this package.
