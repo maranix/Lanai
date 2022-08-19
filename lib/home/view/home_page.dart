@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lanai/home/home.dart';
-import 'package:pexels_repository/pexels_repository.dart';
 
 import './home_view.dart';
 
@@ -25,11 +24,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<HomeBloc>(
-      create: (BuildContext context) => HomeBloc(
-        pexRepo: PexelsRepository(
-          client: Client(),
-        ),
-      )..add(const HomeFetched()),
+      create: (BuildContext context) => HomeBloc(),
       child: const HomeView(),
     );
   }
