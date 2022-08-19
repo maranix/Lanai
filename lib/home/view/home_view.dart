@@ -125,6 +125,18 @@ class CategoriesCarousel extends StatefulWidget {
 }
 
 class _CategoriesCarouselState extends State<CategoriesCarousel> {
+  final Map<String, String> categories = {
+    "Adventure": "assets/images/adventure.jpg",
+    "Animals": "assets/images/animals.jpg",
+    "Dark": "assets/images/dark.jpg",
+    "History": "assets/images/history.jpg",
+    "Light": "assets/images/light.jpg",
+    "Nature": "assets/images/nature.jpg",
+    "Rain": "assets/images/raining.jpg",
+    "Retro": "assets/images/retro.jpg",
+    "Texture": "assets/images/texture.jpg",
+  };
+
   late PageController _pageController;
   int currentPage = 1;
 
@@ -154,6 +166,7 @@ class _CategoriesCarouselState extends State<CategoriesCarousel> {
           currentPage = _pageController.page!.toInt();
         });
       },
+      itemCount: categories.length,
       itemBuilder: (context, index) => AnimatedBuilder(
         animation: _pageController,
         builder: (context, child) {
@@ -170,9 +183,36 @@ class _CategoriesCarouselState extends State<CategoriesCarousel> {
                     1 - (_pageController.page! - index).abs() * 0.5,
                   )
                 : 1.0,
-            child: ColoredBox(
-              color: index % 2 == 0 ? Colors.green : Colors.red,
-              child: child,
+            child: Stack(
+              children: [
+                SizedBox.expand(
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage(
+                          categories.values.toList()[index],
+                        ),
+                      ),
+                    ),
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Text(
+                          categories.keys.toList()[index],
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           );
         },
