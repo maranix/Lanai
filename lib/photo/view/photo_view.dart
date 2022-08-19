@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:lanai/photo/photo.dart';
+import 'package:pexels_repository/pexels_repository.dart';
 
 import './photo_preview.dart';
 
@@ -44,7 +45,9 @@ class PhotoView extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
-              const Expanded(child: PhotoListView()),
+              const Expanded(
+                child: PhotoListView(),
+              ),
             ],
           ),
         ),
@@ -58,29 +61,42 @@ class PhotoListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.custom(
-      gridDelegate: SliverQuiltedGridDelegate(
-        crossAxisCount: 2,
-        crossAxisSpacing: 3,
-        mainAxisSpacing: 3,
-        repeatPattern: QuiltedGridRepeatPattern.inverted,
-        pattern: [
-          const QuiltedGridTile(1, 2),
-          const QuiltedGridTile(1, 1),
-        ],
-      ),
-      childrenDelegate: SliverChildBuilderDelegate(
-        (context, index) => GestureDetector(
-          onTap: () => Navigator.push(
-            context,
-            PhotoPreview.route(),
-          ),
-          child: PhotoListViewItem(
-            key: ValueKey(index),
-          ),
-        ),
-        childCount: 1000,
-      ),
+    return BlocBuilder<PhotoBloc, PhotoState>(
+      builder: (context, state) {
+        if (state.status == PhotoStatus.fetched) {
+          return GridView.custom(
+            gridDelegate: SliverQuiltedGridDelegate(
+              crossAxisCount: 4,
+              crossAxisSpacing: 3,
+              mainAxisSpacing: 3,
+              repeatPattern: QuiltedGridRepeatPattern.inverted,
+              pattern: [
+                const QuiltedGridTile(2, 2),
+                const QuiltedGridTile(1, 1),
+                const QuiltedGridTile(1, 1),
+                const QuiltedGridTile(1, 2),
+              ],
+            ),
+            childrenDelegate: SliverChildBuilderDelegate(
+              (context, index) => GestureDetector(
+                onTap: () => Navigator.push(
+                  context,
+                  PhotoPreview.route(image: state.data.photos[index]),
+                ),
+                child: PhotoListViewItem(
+                  key: ValueKey(index),
+                  photo: state.data.photos[index],
+                ),
+              ),
+              childCount: state.data.photos.length,
+            ),
+          );
+        }
+
+        return const Center(
+          child: CircularProgressIndicator.adaptive(),
+        );
+      },
     );
   }
 }
@@ -88,7 +104,10 @@ class PhotoListView extends StatelessWidget {
 class PhotoListViewItem extends StatefulWidget {
   const PhotoListViewItem({
     super.key,
+    required this.photo,
   });
+
+  final PexelsPhoto photo;
 
   @override
   State<PhotoListViewItem> createState() => _PhotoListViewItemState();
@@ -119,10 +138,14 @@ class _PhotoListViewItemState extends State<PhotoListViewItem> with SingleTicker
   Widget build(BuildContext context) {
     return ScaleTransition(
       scale: _scaleAnimation,
-      child: Shimmer.fromColors(
-        baseColor: Colors.grey,
-        highlightColor: Colors.white,
-        child: const ColoredBox(color: Colors.white),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15.0),
+          image: DecorationImage(
+            image: NetworkImage(widget.photo.src.large),
+            fit: BoxFit.cover,
+          ),
+        ),
       ),
     );
   }

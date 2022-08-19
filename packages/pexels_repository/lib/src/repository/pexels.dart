@@ -14,7 +14,7 @@ class PexelsRepository implements Repository {
   @override
   Future<PexelsPhotoList> getCuratedPhotos() async {
     final http.Response response = await _client.get(
-      Uri.parse("https://api.pexels.com/v1/curated"),
+      Uri.parse("https://api.pexels.com/v1/curated?per_page=80"),
       headers: <String, String>{
         'Authorization': _apiKEY,
         'Content-Type': 'application/json',
@@ -58,8 +58,7 @@ class PexelsRepository implements Repository {
   }
 
   @override
-  Future<PexelsPhotoList> getPhotosByQuery(
-      {required String query, int? page = 1}) async {
+  Future<PexelsPhotoList> getPhotosByQuery({required String query, int? page = 1}) async {
     final http.Response response = await _client.get(
       Uri.parse("https://api.pexels.com/v1/search?query=$query"),
       headers: <String, String>{

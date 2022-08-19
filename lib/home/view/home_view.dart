@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:lanai/photo/photo.dart';
+import 'package:lanai/settings/settings.dart';
 
 /// {@template home_view}
 /// Define your HomePage body/ui structure here.
@@ -13,6 +14,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -40,6 +42,8 @@ class UpperSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final searchController = TextEditingController();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -55,12 +59,23 @@ class UpperSection extends StatelessWidget {
               ),
             ),
             PopupMenuButton(
+              onSelected: (String selection) {
+                switch (selection) {
+                  case 'Settings':
+                    Navigator.push(
+                      context,
+                      SettingsPage.route(),
+                    );
+                }
+              },
               elevation: 0,
               itemBuilder: (context) => [
                 const PopupMenuItem<String>(
+                  value: 'Settings',
                   child: Text('Settings'),
                 ),
                 const PopupMenuItem<String>(
+                  value: 'Favourites',
                   child: Text('Favourites'),
                 ),
               ],
@@ -80,22 +95,34 @@ class UpperSection extends StatelessWidget {
             TextButton(
               onPressed: () => Navigator.push(
                 context,
-                PhotoPage.route(title: "Curated"),
+                PhotoPage.route(
+                  title: "Curated",
+                  event: const CuratedPhotoFetched(),
+                ),
               ),
               child: const Text('See All'),
             ),
           ],
         ),
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 0.2,
-          width: MediaQuery.of(context).size.width,
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15.0),
-              image: const DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage(
-                  'assets/images/curated.jpg',
+        GestureDetector(
+          onTap: () => Navigator.push(
+            context,
+            PhotoPage.route(
+              title: "Curated",
+              event: const CuratedPhotoFetched(),
+            ),
+          ),
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height * 0.2,
+            width: MediaQuery.of(context).size.width,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15.0),
+                image: const DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage(
+                    'assets/images/curated.jpg',
+                  ),
                 ),
               ),
             ),
@@ -105,6 +132,18 @@ class UpperSection extends StatelessWidget {
         SizedBox.square(
           dimension: MediaQuery.of(context).size.height * 0.06,
           child: TextFormField(
+            controller: searchController,
+            onFieldSubmitted: (String query) {
+              searchController.clear();
+
+              Navigator.push(
+                context,
+                PhotoPage.route(
+                  title: query,
+                  event: PexelsPhotoSearched(query: query),
+                ),
+              );
+            },
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.all(8.0),
               prefixIcon: const Icon(Icons.search_rounded),
@@ -194,36 +233,45 @@ class _CategoriesCarouselState extends State<CategoriesCarousel> {
                     1 - (_pageController.page! - index).abs() * 0.5,
                   )
                 : 1.0,
-            child: Stack(
-              children: [
-                SizedBox.expand(
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage(
-                          categories.values.toList()[index],
+            child: GestureDetector(
+              onTap: () => Navigator.push(
+                context,
+                PhotoPage.route(
+                  title: categories.keys.toList()[index],
+                  event: PexelsPhotoSearched(query: categories.keys.toList()[index]),
+                ),
+              ),
+              child: Stack(
+                children: [
+                  SizedBox.expand(
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage(
+                            categories.values.toList()[index],
+                          ),
                         ),
                       ),
-                    ),
-                    child: Align(
-                      alignment: Alignment.bottomRight,
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Text(
-                          categories.keys.toList()[index],
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
+                      child: Align(
+                        alignment: Alignment.bottomRight,
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Text(
+                            categories.keys.toList()[index],
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         },
