@@ -17,3 +17,11 @@ class HomeInitial extends HomeEvent {
   @override
   List<Object> get props => <Object>[];
 }
+
+class HomeFetched extends HomeEvent {
+  /// {@macro home_initial_event}
+  const HomeFetched();
+
+  @override
+  List<Object> get props => <Object>[];
+}

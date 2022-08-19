@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:lanai/home/bloc/bloc.dart';
 import 'package:lanai/photo/photo.dart';
 
 /// {@template home_view}
@@ -86,9 +87,60 @@ class UpperSection extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox.square(
-          dimension: MediaQuery.of(context).size.height * 0.2,
-          child: const Placeholder(),
+        BlocBuilder<HomeBloc, HomeState>(
+          /*
+        TODO: This one does not work properly as of now.
+              Reason:
+                Since we are adding event when the HomePage is building
+                by the time we finish rendering the ui. We have already
+                fetched the curated photos from the api. Hence the state
+                is immediately changed and Animation does not work.
+
+              Possible Fix:
+                Move this widget to its own stateful widget then call
+                the api in didChangeDependecies since it runs only once
+                during the widget lifecycle we can ensure that the api
+                will only be called only once and the rest of the widget
+                tree won't be affected by it.
+
+              Suggestion:
+                Add a delay between rendering the static image and calling
+                the api to make the transition even smoother and natural.
+        */
+          builder: (context, state) => AnimatedSwitcher(
+            duration: const Duration(seconds: 10),
+            child: state.status == HomeStatus.fetched
+                ? SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.2,
+                    width: MediaQuery.of(context).size.width,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(
+                            state.curated.photos.first.src.large2x,
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                : SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.2,
+                    width: MediaQuery.of(context).size.width,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        image: const DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage(
+                            'assets/images/curated.jpg',
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+          ),
         ),
         const SizedBox(height: 20),
         SizedBox.square(
