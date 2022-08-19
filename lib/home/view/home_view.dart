@@ -91,14 +91,20 @@ class UpperSection extends StatelessWidget {
           child: const Placeholder(),
         ),
         const SizedBox(height: 20),
-        const Placeholder(
-          color: Colors.blueGrey,
-          child: SizedBox.square(
-            dimension: 30,
-            child: Text('Search Bar'),
+        SizedBox.square(
+          dimension: MediaQuery.of(context).size.height * 0.06,
+          child: TextFormField(
+            decoration: InputDecoration(
+              contentPadding: const EdgeInsets.all(8.0),
+              prefixIcon: const Icon(Icons.search_rounded),
+              hintText: 'Search',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+            ),
           ),
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 10),
         const Text(
           'Categories',
           style: TextStyle(
