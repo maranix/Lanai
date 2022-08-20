@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lanai/features/theme/theme.dart';
 import 'package:lanai/home/widgets/widgets.dart';
 import 'package:lanai/photo/photo.dart';
-import 'package:lanai/theme/theme.dart';
 
 class UpperSection extends StatelessWidget {
   const UpperSection({super.key});

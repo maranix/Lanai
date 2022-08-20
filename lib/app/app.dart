@@ -1,7 +1,9 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:lanai/features/network/bloc/network_bloc.dart';
+import 'package:lanai/features/theme/my_themes.dart';
+import 'package:lanai/features/theme/theme.dart';
 import 'package:lanai/home/home.dart';
-import 'package:lanai/theme/my_themes.dart';
-import 'package:lanai/theme/theme.dart';
 
 class LanaiApp extends StatelessWidget {
   const LanaiApp({super.key});
@@ -15,6 +17,11 @@ class LanaiApp extends StatelessWidget {
             theme: MyThemes(),
           ),
         ),
+        BlocProvider(
+          create: (_) => NetworkBloc(
+            connectivity: Connectivity(),
+          )..add(const NetworkSubscribed()),
+        )
       ],
       child: const LanaiAppView(),
     );
@@ -29,7 +36,21 @@ class LanaiAppView extends StatelessWidget {
     return BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, state) => MaterialApp(
         theme: state.theme,
-        home: const HomePage(),
+        home: BlocBuilder<NetworkBloc, NetworkState>(
+          builder: (context, state) {
+            if (state.status == NetworkStatus.disconnected) {
+              return Container();
+            }
+
+            if (state.status == NetworkStatus.initial) {
+              return const Center(
+                child: CircularProgressIndicator.adaptive(),
+              );
+            }
+
+            return const HomePage();
+          },
+        ),
       ),
     );
   }

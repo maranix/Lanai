@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lanai/theme/theme.dart';
+import 'package:lanai/features/theme/theme.dart';
 
 class ToggleThemeButton extends StatefulWidget {
   const ToggleThemeButton({super.key});
