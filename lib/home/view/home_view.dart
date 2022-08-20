@@ -2,7 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:lanai/photo/photo.dart';
-import 'package:lanai/settings/settings.dart';
+import 'package:lanai/theme/bloc/bloc.dart';
 
 /// {@template home_view}
 /// Define your HomePage body/ui structure here.
@@ -54,29 +54,30 @@ class UpperSection extends StatelessWidget {
             const Text(
               'Pexels',
               style: TextStyle(
-                fontSize: 45,
+                fontSize: 40,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            PopupMenuButton(
-              onSelected: (String selection) {
-                switch (selection) {
-                  case 'Settings':
-                    Navigator.push(
-                      context,
-                      SettingsPage.route(),
-                    );
-                }
-              },
-              elevation: 0,
-              itemBuilder: (context) => [
-                const PopupMenuItem<String>(
-                  value: 'Settings',
-                  child: Text('Settings'),
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () =>
+                      context.read<ThemeBloc>().add(const ThemeToggled()),
+                  icon: const Icon(Icons.brightness_6),
                 ),
-                const PopupMenuItem<String>(
-                  value: 'Favourites',
-                  child: Text('Favourites'),
+                PopupMenuButton(
+                  elevation: 0,
+                  itemBuilder: (context) => [
+                    const PopupMenuItem<String>(
+                      child: Text('Favourites'),
+                    ),
+                    const PopupMenuItem<String>(
+                      child: Text('Source'),
+                    ),
+                    const PopupMenuItem<String>(
+                      child: Text('Settings'),
+                    ),
+                  ],
                 ),
               ],
             ),
