@@ -1,17 +1,27 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:lanai/features/local_storage/local_storage.dart';
 import 'package:lanai/features/network/bloc/network_bloc.dart';
 import 'package:lanai/features/theme/my_themes.dart';
 import 'package:lanai/features/theme/theme.dart';
 import 'package:lanai/home/home.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LanaiApp extends StatelessWidget {
-  const LanaiApp({super.key});
+  const LanaiApp({super.key, required this.sharedPreferences});
+
+  final SharedPreferences sharedPreferences;
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          lazy: false,
+          create: (_) => LocalStorageBloc(
+            plugin: sharedPreferences,
+          )..add(const SettingsRestore()),
+        ),
         BlocProvider(
           create: (_) => ThemeBloc(
             theme: MyThemes(),

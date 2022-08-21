@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lanai/settings/settings.dart';
+import 'package:lanai/settings/widgets/switch_source_button.dart';
 
 /// {@template settings_view}
 /// Define your SettingsPage body/ui structure here.
@@ -39,6 +40,7 @@ class SettingsView extends StatelessWidget {
                 ],
               ),
               const ToggleThemeButton(),
+              const SwitchSourceButton(),
             ],
           ),
         ),

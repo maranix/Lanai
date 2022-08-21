@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lanai/features/local_storage/local_storage.dart';
 import 'package:lanai/settings/settings.dart';
 import './settings_view.dart';
 
@@ -22,8 +23,13 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localStorageBloc = context.read<LocalStorageBloc>();
+
     return BlocProvider<SettingsBloc>(
-      create: (BuildContext context) => SettingsBloc(),
+      create: (BuildContext context) => SettingsBloc(
+        settingsModel: localStorageBloc.state.settings,
+        plugin: localStorageBloc.spInstance,
+      )..add(const SettingsInitial()),
       child: const SettingsView(),
     );
   }

@@ -17,3 +17,13 @@ class SettingsInitial extends SettingsEvent {
   @override
   List<Object> get props => <Object>[];
 }
+
+class SourceChanged extends SettingsEvent {
+  /// {@macro settings_initial_event}
+  const SourceChanged({required this.src});
+
+  final String src;
+
+  @override
+  List<Object> get props => <Object>[src];
+}
