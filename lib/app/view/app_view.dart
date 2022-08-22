@@ -16,7 +16,7 @@ class AppView extends StatelessWidget {
       builder: (context, state) {
         if (state.status == AppStatus.ready && state.networkStatus == NetworkStatus.connected) {
           return MaterialApp(
-            theme: state.themeMode == ThemeType.light ? ThemeData.light() : ThemeData.dark(),
+            theme: state.settings.theme == ThemeType.light ? ThemeData.light() : ThemeData.dark(),
             home: const HomePage(),
           );
         } else if (state.networkStatus == NetworkStatus.disconnected) {

@@ -8,7 +8,7 @@ class AppState extends Equatable {
   const AppState({
     this.status = AppStatus.initial,
     this.networkStatus = NetworkStatus.disconnected,
-    this.themeMode = ThemeType.light,
+    this.settings = const AppSettingsModel(theme: ThemeType.light),
   });
 
   /// A description for customProperty
@@ -16,25 +16,25 @@ class AppState extends Equatable {
 
   final NetworkStatus networkStatus;
 
-  final ThemeType themeMode;
+  final AppSettingsModel settings;
 
   @override
   List<Object> get props => <Object>[
         status,
         networkStatus,
-        themeMode,
+        settings,
       ];
 
   /// Creates a copy of the current AppState with property changes
   AppState copyWith({
     AppStatus? status,
     NetworkStatus? networkStatus,
-    ThemeType? themeMode,
+    AppSettingsModel? settings,
   }) {
     return AppState(
       status: status ?? this.status,
       networkStatus: networkStatus ?? this.networkStatus,
-      themeMode: themeMode ?? this.themeMode,
+      settings: settings ?? this.settings,
     );
   }
 }

@@ -7,7 +7,8 @@ class ToggleThemeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.watch<AppBloc>().state.themeMode;
+    final theme = context.watch<AppBloc>().state.settings.theme;
+
     return IconButton(
       onPressed: () => context.read<AppBloc>().add(const AppThemeChanged()),
       icon: AnimatedSwitcher(

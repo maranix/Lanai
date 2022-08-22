@@ -35,3 +35,11 @@ class AppThemeChanged extends AppEvent {
   @override
   List<Object> get props => <Object>[];
 }
+
+class AppRestoreSettings extends AppEvent {
+  /// {@macro app_initial_event}
+  const AppRestoreSettings();
+
+  @override
+  List<Object> get props => <Object>[];
+}
