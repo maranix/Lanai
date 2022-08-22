@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:lanai/app/app.dart';
 
@@ -24,7 +25,9 @@ class AppPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<AppBloc>(
-      create: (BuildContext context) => AppBloc(),
+      create: (BuildContext context) => AppBloc(
+        connectivityPlugin: Connectivity(),
+      )..add(const AppInitial()),
       child: const AppView(),
     );
   }

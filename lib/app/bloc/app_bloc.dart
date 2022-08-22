@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:equatable/equatable.dart';
 
 part 'app_event.dart';
@@ -11,14 +12,46 @@ part 'app_state.dart';
 /// {@endtemplate}
 class AppBloc extends Bloc<AppEvent, AppState> {
   /// {@macro app_bloc}
-  AppBloc() : super(const AppState()) {
+  AppBloc({required Connectivity connectivityPlugin})
+      : _connectivityPlugin = connectivityPlugin,
+        super(const AppState()) {
     on<AppInitial>(_onAppInitial);
+    on<AppConnectivityChanged>(_onAppConnectivityChanged);
   }
 
-  FutureOr<void> _onAppInitial (
+  final Connectivity _connectivityPlugin;
+
+  StreamSubscription<ConnectivityResult>? _networkStreamSubscription;
+
+  void _onAppInitial(
     AppInitial event,
     Emitter<AppState> emit,
   ) {
-    // TODO: Add logic and emit state here
+    _networkStreamSubscription?.cancel();
+
+    _networkStreamSubscription = _connectivityPlugin.onConnectivityChanged.listen(
+      (ConnectivityResult result) => add(
+        AppConnectivityChanged(status: result),
+      ),
+    );
+  }
+
+  void _onAppConnectivityChanged(
+    AppConnectivityChanged event,
+    Emitter<AppState> emit,
+  ) {
+    if (event.status == ConnectivityResult.none) {
+      emit(const AppState(networkStatus: NetworkStatus.disconnected));
+    } else {
+      emit(
+        const AppState(status: AppStatus.ready, networkStatus: NetworkStatus.connected),
+      );
+    }
+  }
+
+  @override
+  Future<void> close() {
+    _networkStreamSubscription?.cancel();
+    return super.close();
   }
 }
