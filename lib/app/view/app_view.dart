@@ -12,31 +12,11 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AppBloc, AppState>(
-      builder: (context, state) {
-        if (state.status == AppStatus.ready && state.networkStatus == NetworkStatus.connected) {
-          return MaterialApp(
-            theme: state.settings.theme == ThemeType.light ? ThemeData.light() : ThemeData.dark(),
-            home: const HomePage(),
-          );
-        } else if (state.networkStatus == NetworkStatus.disconnected) {
-          return const MaterialApp(
-            home: Scaffold(
-              body: Center(
-                child: Text('Disconnect'),
-              ),
-            ),
-          );
-        }
+    final theme = context.select((AppBloc bloc) => bloc.state.settings.theme);
 
-        return const MaterialApp(
-          home: Scaffold(
-            body: Center(
-              child: CircularProgressIndicator.adaptive(),
-            ),
-          ),
-        );
-      },
+    return MaterialApp(
+      theme: theme == ThemeType.light ? ThemeData.light() : ThemeData.dark(),
+      home: const HomePage(),
     );
   }
 }

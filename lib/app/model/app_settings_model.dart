@@ -6,8 +6,9 @@ class AppSettingsModel extends Equatable {
     this.theme = ThemeType.light,
   });
 
-  factory AppSettingsModel.fromJson(Map<String, dynamic> json) => AppSettingsModel(
-        theme: json["themeType"],
+  factory AppSettingsModel.fromJson(Map<String, dynamic> json) =>
+      AppSettingsModel(
+        theme: ThemeType.values.byName(json['themeType']),
       );
 
   final ThemeType theme;
@@ -20,7 +21,7 @@ class AppSettingsModel extends Equatable {
       );
 
   Map<String, dynamic> toJson() => {
-        'themeType': theme,
+        'themeType': theme.name,
       };
 
   @override

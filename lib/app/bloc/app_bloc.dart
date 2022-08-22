@@ -26,6 +26,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     on<AppConnectivityChanged>(_onAppConnectivityChanged);
     on<AppThemeChanged>(_onAppThemeChanged);
     on<AppRestoreSettings>(_onAppRestoreSettings);
+    on<AppSettingsUpdated>(_onAppSettingsUpdated);
   }
 
   final Connectivity _connectivityPlugin;
@@ -42,11 +43,14 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   ) {
     _networkStreamSubscription?.cancel();
 
-    _networkStreamSubscription = _connectivityPlugin.onConnectivityChanged.listen(
+    _networkStreamSubscription =
+        _connectivityPlugin.onConnectivityChanged.listen(
       (ConnectivityResult result) => add(
         AppConnectivityChanged(status: result),
       ),
     );
+
+    add(const AppRestoreSettings());
   }
 
   FutureOr<void> _onAppRestoreSettings(
@@ -60,12 +64,21 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     /// 1. Serialize and save default settings in local storage so we can update & retrieve it later.
     /// 2. Deserialize saved settings back into an object to restore app state.
     if (savedSettings.isEmpty) {
+      emit(AppState(status: AppStatus.ready, settings: state.settings));
+
       final settingsToSave = json.encode(state.settings.toJson());
+
       await _sharedPreferences.setString('settings', settingsToSave);
     } else {
       final settings = AppSettingsModel.fromJson(json.decode(savedSettings));
 
-      emit(AppState(status: AppStatus.ready, settings: settings));
+      emit(
+        AppState(
+          status: AppStatus.ready,
+          networkStatus: state.networkStatus,
+          settings: settings,
+        ),
+      );
     }
   }
 
@@ -77,7 +90,11 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       emit(const AppState(networkStatus: NetworkStatus.disconnected));
     } else {
       emit(
-        AppState(status: state.status, networkStatus: NetworkStatus.connected),
+        AppState(
+          status: state.status,
+          networkStatus: NetworkStatus.connected,
+          settings: state.settings,
+        ),
       );
     }
   }
@@ -90,10 +107,24 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       AppState(
         status: state.status,
         networkStatus: state.networkStatus,
-        settings:
-            state.settings.copyWith(theme: state.settings.theme == ThemeType.light ? ThemeType.dark : ThemeType.light),
+        settings: state.settings.copyWith(
+          theme: state.settings.theme == ThemeType.light
+              ? ThemeType.dark
+              : ThemeType.light,
+        ),
       ),
     );
+
+    add(const AppSettingsUpdated());
+  }
+
+  FutureOr<void> _onAppSettingsUpdated(
+    AppSettingsUpdated event,
+    Emitter<AppState> emit,
+  ) async {
+    final settingsToSave = json.encode(state.settings.toJson());
+
+    await _sharedPreferences.setString('settings', settingsToSave);
   }
 
   @override

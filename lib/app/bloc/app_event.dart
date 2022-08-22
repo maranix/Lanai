@@ -43,3 +43,11 @@ class AppRestoreSettings extends AppEvent {
   @override
   List<Object> get props => <Object>[];
 }
+
+class AppSettingsUpdated extends AppEvent {
+  /// {@macro app_initial_event}
+  const AppSettingsUpdated();
+
+  @override
+  List<Object> get props => <Object>[];
+}
