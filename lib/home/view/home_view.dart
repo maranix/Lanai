@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lanai/home/home.dart';
 
 /// {@template home_view}
 /// Define your HomePage body/ui structure here.
@@ -7,11 +8,17 @@ class HomeView extends StatelessWidget {
   /// {@macro home_view}
   const HomeView({super.key});
 
-    @override
+  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text('Placeholder'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text('Placeholder'),
+            ToggleThemeButton(),
+          ],
+        ),
       ),
     );
   }

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:equatable/equatable.dart';
+import 'package:lanai/app/constants.dart';
 
 part 'app_event.dart';
 part 'app_state.dart';
@@ -17,6 +18,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         super(const AppState()) {
     on<AppInitial>(_onAppInitial);
     on<AppConnectivityChanged>(_onAppConnectivityChanged);
+    on<AppThemeChanged>(_onAppThemeChanged);
   }
 
   final Connectivity _connectivityPlugin;
@@ -47,6 +49,18 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         const AppState(status: AppStatus.ready, networkStatus: NetworkStatus.connected),
       );
     }
+  }
+
+  void _onAppThemeChanged(
+    AppThemeChanged event,
+    Emitter<AppState> emit,
+  ) {
+    emit(
+      AppState(
+          status: state.status,
+          networkStatus: state.networkStatus,
+          themeMode: state.themeMode == ThemeType.light ? ThemeType.dark : ThemeType.light),
+    );
   }
 
   @override

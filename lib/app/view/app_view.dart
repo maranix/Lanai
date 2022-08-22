@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lanai/app/app.dart';
+import 'package:lanai/app/constants.dart';
 import 'package:lanai/home/view/home_page.dart';
 
 /// {@template app_view}
@@ -11,26 +12,31 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: BlocBuilder<AppBloc, AppState>(
-        builder: (context, state) {
-          if (state.status == AppStatus.ready && state.networkStatus == NetworkStatus.connected) {
-            return const HomePage();
-          } else if (state.networkStatus == NetworkStatus.disconnected) {
-            return const Scaffold(
+    return BlocBuilder<AppBloc, AppState>(
+      builder: (context, state) {
+        if (state.status == AppStatus.ready && state.networkStatus == NetworkStatus.connected) {
+          return MaterialApp(
+            theme: state.themeMode == ThemeType.light ? ThemeData.light() : ThemeData.dark(),
+            home: const HomePage(),
+          );
+        } else if (state.networkStatus == NetworkStatus.disconnected) {
+          return const MaterialApp(
+            home: Scaffold(
               body: Center(
                 child: Text('Disconnect'),
               ),
-            );
-          }
+            ),
+          );
+        }
 
-          return const Scaffold(
+        return const MaterialApp(
+          home: Scaffold(
             body: Center(
               child: CircularProgressIndicator.adaptive(),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }
