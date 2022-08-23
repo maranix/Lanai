@@ -25,6 +25,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     on<AppInitial>(_onAppInitial);
     on<AppConnectivityChanged>(_onAppConnectivityChanged);
     on<AppThemeChanged>(_onAppThemeChanged);
+    on<AppSourceChanged>(_onAppSourceChanged);
     on<AppRestoreSettings>(_onAppRestoreSettings);
     on<AppSettingsUpdated>(_onAppSettingsUpdated);
   }
@@ -111,6 +112,23 @@ class AppBloc extends Bloc<AppEvent, AppState> {
           theme: state.settings.theme == ThemeType.light
               ? ThemeType.dark
               : ThemeType.light,
+        ),
+      ),
+    );
+
+    add(const AppSettingsUpdated());
+  }
+
+  void _onAppSourceChanged(
+    AppSourceChanged event,
+    Emitter<AppState> emit,
+  ) {
+    emit(
+      AppState(
+        status: state.status,
+        networkStatus: state.networkStatus,
+        settings: state.settings.copyWith(
+          source: event.src,
         ),
       ),
     );

@@ -10,6 +10,12 @@ enum ThemeType {
   dark,
 }
 
+enum ImageSource {
+  pexels,
+
+  pixabay,
+}
+
 enum AppStatus {
   initial,
 

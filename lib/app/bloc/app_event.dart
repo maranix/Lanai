@@ -36,6 +36,16 @@ class AppThemeChanged extends AppEvent {
   List<Object> get props => <Object>[];
 }
 
+class AppSourceChanged extends AppEvent {
+  /// {@macro app_initial_event}
+  const AppSourceChanged({required this.src});
+
+  final ImageSource src;
+
+  @override
+  List<Object> get props => <Object>[src];
+}
+
 class AppRestoreSettings extends AppEvent {
   /// {@macro app_initial_event}
   const AppRestoreSettings();
