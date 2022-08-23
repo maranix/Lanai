@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:lanai/app/constants.dart';
+import 'package:lanai/app/app.dart';
 
 class AppSettingsModel extends Equatable {
   const AppSettingsModel({

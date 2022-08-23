@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lanai/app/app.dart';
-import 'package:lanai/app/constants.dart';
+import 'package:lanai/app/utils/theme.dart';
 import 'package:lanai/home/view/home_page.dart';
 
 /// {@template app_view}
@@ -15,7 +15,7 @@ class AppView extends StatelessWidget {
     final theme = context.select((AppBloc bloc) => bloc.state.settings.theme);
 
     return MaterialApp(
-      theme: theme == ThemeType.light ? ThemeData.light() : ThemeData.dark(),
+      theme: theme == ThemeType.light ? lightTheme : darkTheme,
       home: const HomePage(),
     );
   }

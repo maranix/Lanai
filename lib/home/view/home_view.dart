@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lanai/app/app.dart';
-import 'package:lanai/app/constants.dart';
 import 'package:lanai/home/home.dart';
 import 'pexels_body.dart';
 import 'pixabay_body.dart';

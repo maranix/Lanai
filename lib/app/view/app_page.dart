@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lanai/app/app.dart';
-import 'package:lanai/app/constants.dart';
 import './app_view.dart';
 
 /// {@template app_page}

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lanai/app/app.dart';
-import 'package:lanai/app/constants.dart';
 
 class ToggleThemeButton extends StatelessWidget {
   const ToggleThemeButton({super.key});
@@ -15,8 +14,9 @@ class ToggleThemeButton extends StatelessWidget {
         duration: const Duration(milliseconds: 500),
         switchInCurve: Curves.easeIn,
         switchOutCurve: Curves.easeInOut,
-        child:
-            theme == ThemeType.light ? const Icon(Icons.brightness_2_rounded) : const Icon(Icons.brightness_1_rounded),
+        child: theme == ThemeType.light
+            ? const Icon(Icons.brightness_2_rounded)
+            : const Icon(Icons.brightness_1_rounded),
       ),
     );
   }

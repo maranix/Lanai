@@ -1,11 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:bloc/bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:equatable/equatable.dart';
-import 'package:lanai/app/constants.dart';
-import 'package:lanai/app/model/app_settings_model.dart';
+import 'package:lanai/app/app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'app_event.dart';
