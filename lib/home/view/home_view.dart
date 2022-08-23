@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:lanai/app/app.dart';
 import 'package:lanai/app/constants.dart';
 import 'package:lanai/home/home.dart';
+import 'pexels_body.dart';
+import 'pixabay_body.dart';
 
 /// {@template home_view}
 /// Define your HomePage body/ui structure here.
@@ -12,35 +14,27 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final title = context.watch<AppBloc>().state.settings.source;
+
     return Scaffold(
-      body: Center(
-        child: BlocBuilder<AppBloc, AppState>(
-          builder: (context, state) {
-            if (state.settings.source == ImageSource.pexels) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text('Pexels'),
-                  ToggleThemeButton(),
-                  SourceDropDownMenu(),
-                ],
-              );
-            }
+      appBar: AppBar(
+        title: Text(title.name),
+        actions: const [
+          MoreVertButton(),
+        ],
+      ),
+      body: BlocBuilder<AppBloc, AppState>(
+        builder: (context, state) {
+          if (state.settings.source == ImageSource.pexels) {
+            return const PexelsBody();
+          }
 
-            if (state.settings.source == ImageSource.pixabay) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text('Pixabay'),
-                  ToggleThemeButton(),
-                  SourceDropDownMenu(),
-                ],
-              );
-            }
+          if (state.settings.source == ImageSource.pixabay) {
+            return const PixabayBody();
+          }
 
-            return const SizedBox.shrink();
-          },
-        ),
+          return const SizedBox.shrink();
+        },
       ),
     );
   }
