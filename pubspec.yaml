@@ -9,12 +9,18 @@ environment:
 
 dependencies:
   bloc: ^8.1.1
+  equatable: ^2.0.5
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.2
   flutter_localizations:
     sdk: flutter
   intl: ^0.17.0
+
+  pexels_repository:
+    path: ./packages/pexels/pexels_repository/
+  pixabay_repository:
+    path: ./packages/pixabay/pixabay_repository/
 
 dev_dependencies:
   bloc_test: ^9.1.1
