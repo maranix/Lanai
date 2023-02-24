@@ -7,13 +7,19 @@ abstract class PixabayInterface {
 
   Future<void> getPhotosFromQuery({
     required String query,
+    required int page,
+    required int perPage,
   });
 
   Future<void> getPhotosFromCategory({
     required PixabayImageCategory category,
+    required int page,
+    required int perPage,
   });
 
   Future<void> getPhotosFromColors({
     required PixabayImageColors colors,
+    required int page,
+    required int perPage,
   });
 }

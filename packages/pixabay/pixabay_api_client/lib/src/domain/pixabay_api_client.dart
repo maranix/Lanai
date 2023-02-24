@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
-import 'package:pixabay_api_client/src/data/pixabay_api_client.dart';
+import 'package:pixabay_api_client/src/data/pixabay_api.dart';
 import 'package:pixabay_api_client/src/domain/models/models.dart';
 import 'package:pixabay_api_client/src/models/photos_response/photos_response.dart';
 import 'package:pixabay_api_client/src/utils/constants.dart';
@@ -48,14 +48,15 @@ class PixabayApiClient implements PixabayInterface {
   @override
   Future<PhotosResponse> getPhotosFromCategory({
     required PixabayImageCategory category,
+    required int page,
+    required int perPage,
     PixabayImageType imageType = PixabayImageType.all,
     PixabayImageOrientation imageOrientation = PixabayImageOrientation.all,
     PixabayImageOrder order = PixabayImageOrder.popular,
     bool editorsChoice = false,
-    int page = 1,
   }) async {
     final uri = Uri.parse(
-      '$_baseURL/?key=$_apiKey&category=${category.name}&image_type=${imageType.name}&orientation=${imageOrientation.name}&order=${order.name}&editors_choice=$editorsChoice&page=$page',
+      '$_baseURL/?key=$_apiKey&category=${category.name}&image_type=${imageType.name}&orientation=${imageOrientation.name}&order=${order.name}&editors_choice=$editorsChoice&page=$page&per_page=$perPage',
     );
 
     final response = await _httpClient.get(uri);
@@ -75,14 +76,15 @@ class PixabayApiClient implements PixabayInterface {
   @override
   Future<PhotosResponse> getPhotosFromColors({
     required PixabayImageColors colors,
+    required int page,
+    required int perPage,
     PixabayImageType imageType = PixabayImageType.all,
     PixabayImageOrientation imageOrientation = PixabayImageOrientation.all,
     PixabayImageOrder order = PixabayImageOrder.popular,
     bool editorsChoice = false,
-    int page = 1,
   }) async {
     final uri = Uri.parse(
-      '$_baseURL/?key=$_apiKey&color=${colors.name}&image_type=${imageType.name}&orientation=${imageOrientation.name}&order=${order.name}&editors_choice=$editorsChoice&page=$page',
+      '$_baseURL/?key=$_apiKey&color=${colors.name}&image_type=${imageType.name}&orientation=${imageOrientation.name}&order=${order.name}&editors_choice=$editorsChoice&page=$page&per_page=$perPage',
     );
 
     final response = await _httpClient.get(uri);
@@ -102,14 +104,15 @@ class PixabayApiClient implements PixabayInterface {
   @override
   Future<PhotosResponse> getPhotosFromQuery({
     required String query,
+    required int page,
+    required int perPage,
     PixabayImageType imageType = PixabayImageType.all,
     PixabayImageOrientation imageOrientation = PixabayImageOrientation.all,
     PixabayImageOrder order = PixabayImageOrder.popular,
     bool editorsChoice = false,
-    int page = 1,
   }) async {
     final uri = Uri.parse(
-      '$_baseURL/?key=$_apiKey&q=$query&image_type=${imageType.name}&orientation=${imageOrientation.name}&order=${order.name}&editors_choice=$editorsChoice&page=$page',
+      '$_baseURL/?key=$_apiKey&q=$query&image_type=${imageType.name}&orientation=${imageOrientation.name}&order=${order.name}&editors_choice=$editorsChoice&page=$page&per_page=$perPage',
     );
 
     final response = await _httpClient.get(uri);

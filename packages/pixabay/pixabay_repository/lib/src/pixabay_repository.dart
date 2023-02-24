@@ -24,6 +24,7 @@ class PixabayRepository implements PixabayInterface {
     PixabayImageOrder order = PixabayImageOrder.popular,
     bool editorsChoice = false,
     int page = 1,
+    int perPage = 40,
   }) async {
     try {
       return await _apiClient.getPhotosFromCategory(
@@ -33,6 +34,7 @@ class PixabayRepository implements PixabayInterface {
         order: order,
         editorsChoice: editorsChoice,
         page: page,
+        perPage: perPage,
       );
     } catch (e, stackTrace) {
       Error.throwWithStackTrace(GetFailure(error: e), stackTrace);
@@ -47,6 +49,7 @@ class PixabayRepository implements PixabayInterface {
     PixabayImageOrder order = PixabayImageOrder.popular,
     bool editorsChoice = false,
     int page = 1,
+    int perPage = 40,
   }) async {
     try {
       return await _apiClient.getPhotosFromColors(
@@ -56,6 +59,7 @@ class PixabayRepository implements PixabayInterface {
         order: order,
         editorsChoice: editorsChoice,
         page: page,
+        perPage: perPage,
       );
     } catch (e, stackTrace) {
       Error.throwWithStackTrace(GetFailure(error: e), stackTrace);
@@ -70,6 +74,7 @@ class PixabayRepository implements PixabayInterface {
     PixabayImageOrder order = PixabayImageOrder.popular,
     bool editorsChoice = false,
     int page = 1,
+    int perPage = 40,
   }) async {
     try {
       return await _apiClient.getPhotosFromQuery(
@@ -79,6 +84,7 @@ class PixabayRepository implements PixabayInterface {
         order: order,
         editorsChoice: editorsChoice,
         page: page,
+        perPage: perPage,
       );
     } catch (e, stackTrace) {
       Error.throwWithStackTrace(GetFailure(error: e), stackTrace);
