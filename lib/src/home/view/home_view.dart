@@ -1,5 +1,7 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lanai/src/theme/theme.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -44,6 +46,12 @@ class HomeView extends StatelessWidget {
             )
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => context.read<ThemeBloc>().add(
+              const ThemeToggled(),
+            ),
+        child: Icon(Icons.brightness_5_rounded),
       ),
     );
   }
