@@ -26,7 +26,7 @@ class AppView extends StatelessWidget {
 
     final goRouter = GoRouter(
       routes: $appRoutes,
-      initialLocation: HomeScreenRoute().location,
+      initialLocation: PhotosScreenRoute().location,
     );
 
     return MaterialApp.router(

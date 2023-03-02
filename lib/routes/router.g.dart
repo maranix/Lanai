@@ -7,19 +7,20 @@ part of 'router.dart';
 // **************************************************************************
 
 List<GoRoute> get $appRoutes => [
-      $homeScreenRoute,
+      $photosScreenRoute,
     ];
 
-GoRoute get $homeScreenRoute => GoRouteData.$route(
-      path: '/',
-      factory: $HomeScreenRouteExtension._fromState,
+GoRoute get $photosScreenRoute => GoRouteData.$route(
+      path: '/photos',
+      factory: $PhotosScreenRouteExtension._fromState,
     );
 
-extension $HomeScreenRouteExtension on HomeScreenRoute {
-  static HomeScreenRoute _fromState(GoRouterState state) => HomeScreenRoute();
+extension $PhotosScreenRouteExtension on PhotosScreenRoute {
+  static PhotosScreenRoute _fromState(GoRouterState state) =>
+      PhotosScreenRoute();
 
   String get location => GoRouteData.$location(
-        '/',
+        '/photos',
       );
 
   void go(BuildContext context) => context.go(location);
