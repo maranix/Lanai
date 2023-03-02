@@ -14,6 +14,7 @@ class ThemeDataLight extends ThemeState {
       : super(
           ThemeData(
             brightness: Brightness.light,
+            fontFamily: 'Golos',
           ),
         );
 
@@ -26,6 +27,7 @@ class ThemeDataDark extends ThemeState {
       : super(
           ThemeData(
             brightness: Brightness.dark,
+            fontFamily: 'Golos',
             scaffoldBackgroundColor: Colors.black,
           ),
         );

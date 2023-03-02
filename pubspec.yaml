@@ -39,3 +39,14 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
+
+  fonts:
+    - family: Golos
+      fonts:
+        - asset: ./assets/fonts/golos/GolosText-VariableFont_wght.ttf
+    - family: Playfair Display
+      fonts:
+        - asset: ./assets/fonts/playfair/PlayfairDisplay-VariableFont_wght.ttf
+    - family: Raleway
+      fonts:
+        - asset: ./assets/fonts/raleway/Raleway-VariableFont_wght.ttf

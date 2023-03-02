@@ -17,6 +17,10 @@ class PhotosView extends StatelessWidget {
               child: FittedBox(
                 child: Text(
                   context.l10n.photosScreenTitle,
+                  style: const TextStyle(
+                    fontFamily: 'Playfair Display',
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
