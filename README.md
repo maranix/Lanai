@@ -1,13 +1,7 @@
 # Lanai
 
 > **Note**
-> V4 is in Development with a complete UI Overhaul and new features.
-
-<a href="https://play.google.com/store/apps/details?id=com.cloverspace.lanai">
-  <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
-       alt="Get it on Google Play"
-       height="80" />
-</a>
+> This project has been discountinued and removed from play store.
 
 [![codecov](https://codecov.io/gh/ramanverma2k/Lanai/branch/main/graph/badge.svg?token=DLKG418V9C)](https://codecov.io/gh/ramanverma2k/Lanai)
 
